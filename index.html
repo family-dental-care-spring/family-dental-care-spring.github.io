@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dinosaurs — A Field Guide to the Mesozoic</title>
+<meta name="description" content="A field guide to the dinosaurs of the Triassic, Jurassic, and Cretaceous periods.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦕</text></svg>">
+<style>
+  :root {
+    --bg: #fbf8f3;
+    --bg-raised: #ffffff;
+    --bg-sunken: #f2ece1;
+    --ink: #1f1b16;
+    --ink-soft: #5c5348;
+    --ink-faint: #8d8477;
+    --line: #e2d9c9;
+    --accent: #2f6f4f;
+    --accent-soft: #e6f0e9;
+    --triassic: #b0703a;
+    --jurassic: #2f6f4f;
+    --cretaceous: #6a4a86;
+    --shadow: 0 1px 2px rgba(31,27,22,.05), 0 8px 24px -12px rgba(31,27,22,.18);
+    --radius: 14px;
+    --measure: 68ch;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14120f;
+      --bg-raised: #1d1a16;
+      --bg-sunken: #100e0c;
+      --ink: #f2ece2;
+      --ink-soft: #b9b0a2;
+      --ink-faint: #857c6e;
+      --line: #322d26;
+      --accent: #7fc79e;
+      --accent-soft: #1b2a22;
+      --triassic: #d99b5f;
+      --jurassic: #7fc79e;
+      --cretaceous: #b394d6;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.7);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #14120f;
+    --bg-raised: #1d1a16;
+    --bg-sunken: #100e0c;
+    --ink: #f2ece2;
+    --ink-soft: #b9b0a2;
+    --ink-faint: #857c6e;
+    --line: #322d26;
+    --accent: #7fc79e;
+    --accent-soft: #1b2a22;
+    --triassic: #d99b5f;
+    --jurassic: #7fc79e;
+    --cretaceous: #b394d6;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.7);
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 400 17px/1.65 ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, .ui {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Inter, Helvetica, Arial, sans-serif;
+  }
+  a { color: var(--accent); text-underline-offset: 2px; }
+
+  .wrap { width: min(100% - 2.5rem, 1140px); margin-inline: auto; }
+
+  /* ---------- header ---------- */
+  header.site {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .bar { display: flex; align-items: center; gap: 1rem; padding: .7rem 0; }
+  .brand { display: flex; align-items: center; gap: .55rem; font-weight: 650; letter-spacing: -.01em; }
+  .brand span.mark { font-size: 1.35rem; line-height: 1; }
+  nav.site { margin-left: auto; display: flex; gap: .25rem; flex-wrap: wrap; }
+  nav.site a {
+    font: 500 .875rem/1 ui-sans-serif, system-ui, sans-serif;
+    color: var(--ink-soft); text-decoration: none;
+    padding: .5rem .7rem; border-radius: 8px;
+  }
+  nav.site a:hover { color: var(--ink); background: var(--bg-sunken); }
+
+  /* ---------- hero ---------- */
+  .hero { position: relative; padding: clamp(3rem, 9vw, 6.5rem) 0 clamp(2.5rem, 6vw, 4rem); overflow: hidden; }
+  .hero::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(60ch 40ch at 78% 18%, var(--accent-soft), transparent 70%),
+      linear-gradient(to bottom, transparent 55%, var(--bg-sunken));
+    opacity: .85; pointer-events: none;
+  }
+  .hero .wrap { position: relative; display: grid; gap: 2.5rem; align-items: center; grid-template-columns: 1fr; }
+  @media (min-width: 900px) { .hero .wrap { grid-template-columns: 1.05fr .95fr; } }
+  .eyebrow {
+    font: 600 .75rem/1 ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--accent);
+    display: inline-flex; align-items: center; gap: .5rem; margin-bottom: 1rem;
+  }
+  .eyebrow::before { content: ""; width: 1.75rem; height: 1px; background: currentColor; }
+  h1 { font-size: clamp(2.4rem, 6.5vw, 4rem); line-height: 1.04; letter-spacing: -.03em; margin: 0 0 1rem; font-weight: 700; }
+  h1 em { font-style: normal; color: var(--accent); }
+  .lede { font-size: clamp(1.05rem, 2vw, 1.2rem); color: var(--ink-soft); max-width: 46ch; margin: 0 0 1.75rem; }
+  .cta { display: flex; gap: .75rem; flex-wrap: wrap; }
+  .btn {
+    font: 600 .9rem/1 ui-sans-serif, system-ui, sans-serif;
+    display: inline-flex; align-items: center; gap: .45rem;
+    padding: .8rem 1.15rem; border-radius: 10px; text-decoration: none;
+    border: 1px solid transparent; cursor: pointer;
+  }
+  .btn-primary { background: var(--accent); color: var(--bg); }
+  .btn-primary:hover { filter: brightness(1.08); }
+  .btn-ghost { border-color: var(--line); color: var(--ink); background: var(--bg-raised); }
+  .btn-ghost:hover { border-color: var(--ink-faint); }
+
+  .hero-art { position: relative; }
+  .hero-art svg { width: 100%; height: auto; display: block; filter: drop-shadow(0 12px 24px rgba(31,27,22,.14)); }
+
+  /* ---------- stats ---------- */
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px;
+           background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; margin-top: 2.5rem; }
+  .stat { background: var(--bg-raised); padding: 1.1rem 1.25rem; }
+  .stat b { display: block; font: 700 1.6rem/1.1 ui-sans-serif, system-ui, sans-serif; letter-spacing: -.02em; }
+  .stat span { font: 500 .78rem/1.4 ui-sans-serif, system-ui, sans-serif; color: var(--ink-faint);
+               text-transform: uppercase; letter-spacing: .07em; }
+
+  /* ---------- sections ---------- */
+  section { padding: clamp(3rem, 7vw, 5rem) 0; }
+  .section-head { margin-bottom: 2rem; max-width: var(--measure); }
+  h2 { font-size: clamp(1.6rem, 3.4vw, 2.2rem); letter-spacing: -.025em; margin: 0 0 .6rem; font-weight: 680; }
+  .section-head p { color: var(--ink-soft); margin: 0; }
+
+  /* ---------- timeline ---------- */
+  .timeline { border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg-raised);
+              padding: 1.5rem; box-shadow: var(--shadow); }
+  .tl-track { display: flex; height: 2.5rem; border-radius: 8px; overflow: hidden; margin-bottom: 1.25rem; }
+  .tl-seg { display: flex; align-items: center; justify-content: center; color: #fff;
+            font: 600 .8rem/1 ui-sans-serif, system-ui, sans-serif; letter-spacing: .02em; white-space: nowrap; }
+  .tl-seg.tri { background: var(--triassic); flex: 51; }
+  .tl-seg.jur { background: var(--jurassic); flex: 56; }
+  .tl-seg.cre { background: var(--cretaceous); flex: 79; }
+  .tl-seg span { padding-inline: .4rem; overflow: hidden; text-overflow: ellipsis; }
+  .tl-scale { display: flex; justify-content: space-between; font: 500 .72rem/1 ui-sans-serif, system-ui, sans-serif;
+              color: var(--ink-faint); letter-spacing: .04em; }
+  .tl-notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1.25rem; margin-top: 1.5rem;
+              padding-top: 1.5rem; border-top: 1px solid var(--line); }
+  .tl-note h3 { font-size: .95rem; margin: 0 0 .35rem; display: flex; align-items: center; gap: .45rem; }
+  .tl-note h3::before { content: ""; width: .6rem; height: .6rem; border-radius: 2px; background: currentColor; }
+  .tl-note.tri h3 { color: var(--triassic); }
+  .tl-note.jur h3 { color: var(--jurassic); }
+  .tl-note.cre h3 { color: var(--cretaceous); }
+  .tl-note p { margin: 0; font-size: .92rem; color: var(--ink-soft); }
+
+  /* ---------- filters ---------- */
+  .filters { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.75rem; }
+  .chip {
+    font: 600 .82rem/1 ui-sans-serif, system-ui, sans-serif;
+    padding: .55rem .9rem; border-radius: 999px; cursor: pointer;
+    border: 1px solid var(--line); background: var(--bg-raised); color: var(--ink-soft);
+  }
+  .chip:hover { border-color: var(--ink-faint); color: var(--ink); }
+  .chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+  /* ---------- cards ---------- */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; }
+  .card {
+    border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg-raised);
+    overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow);
+    transition: transform .18s ease, border-color .18s ease;
+  }
+  .card:hover { transform: translateY(-3px); border-color: var(--ink-faint); }
+  .card[hidden] { display: none; }
+  .card-art { background: var(--bg-sunken); padding: 1.25rem; border-bottom: 1px solid var(--line);
+              display: flex; align-items: flex-end; justify-content: center; min-height: 150px; }
+  .card-art svg { width: 100%; max-width: 230px; height: auto; }
+  .card-body { padding: 1.15rem 1.25rem 1.35rem; display: flex; flex-direction: column; gap: .6rem; flex: 1; }
+  .card h3 { margin: 0; font-size: 1.12rem; letter-spacing: -.015em; }
+  .card .pron { font: 400 .8rem/1.3 ui-sans-serif, system-ui, sans-serif; color: var(--ink-faint); font-style: italic; }
+  .card p { margin: 0; font-size: .93rem; color: var(--ink-soft); }
+  .tags { display: flex; gap: .4rem; flex-wrap: wrap; margin-top: auto; padding-top: .5rem; }
+  .tag {
+    font: 600 .68rem/1 ui-sans-serif, system-ui, sans-serif; letter-spacing: .06em; text-transform: uppercase;
+    padding: .35rem .55rem; border-radius: 5px; background: var(--bg-sunken); color: var(--ink-faint);
+  }
+  .tag.period { color: #fff; }
+  .tag.period.tri { background: var(--triassic); }
+  .tag.period.jur { background: var(--jurassic); }
+  .tag.period.cre { background: var(--cretaceous); }
+  .facts { display: grid; grid-template-columns: repeat(2, 1fr); gap: .5rem .75rem;
+           border-top: 1px solid var(--line); padding-top: .75rem; }
+  .fact { font: 500 .78rem/1.35 ui-sans-serif, system-ui, sans-serif; }
+  .fact span { display: block; color: var(--ink-faint); font-size: .68rem; text-transform: uppercase; letter-spacing: .07em; }
+
+  .empty { color: var(--ink-faint); padding: 2rem 0; text-align: center; }
+  .empty[hidden] { display: none; }
+
+  /* ---------- extinction ---------- */
+  .panel {
+    border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg-raised);
+    padding: clamp(1.5rem, 4vw, 2.5rem); box-shadow: var(--shadow);
+  }
+  .panel .measure { max-width: var(--measure); }
+  .panel p + p { margin-top: 1rem; }
+  .panel p { color: var(--ink-soft); }
+  .panel p:first-of-type { color: var(--ink); font-size: 1.08rem; }
+
+  /* ---------- footer ---------- */
+  footer.site { border-top: 1px solid var(--line); background: var(--bg-sunken); padding: 2.5rem 0; margin-top: 2rem; }
+  footer.site .wrap { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;
+                      font: 400 .85rem/1.5 ui-sans-serif, system-ui, sans-serif; color: var(--ink-faint); }
+  footer.site a { color: var(--ink-soft); }
+  footer.site .spacer { margin-left: auto; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap bar">
+    <div class="brand"><span class="mark">🦕</span> Dinosaurs</div>
+    <nav class="site">
+      <a href="#eras">Eras</a>
+      <a href="#guide">Field Guide</a>
+      <a href="#extinction">Extinction</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <div class="eyebrow">A field guide</div>
+        <h1>They ruled the Earth for <em>165 million years</em>.</h1>
+        <p class="lede">From the first small bipeds of the Triassic to the last horned giants of the Cretaceous — a short guide to the animals that dominated the Mesozoic, and the birds that carry their lineage today.</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="#guide">Browse the guide →</a>
+          <a class="btn btn-ghost" href="#eras">See the timeline</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 460 320" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="sauro" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#3d8a64"/><stop offset="1" stop-color="#245640"/>
+            </linearGradient>
+            <linearGradient id="theropod" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#c07f45"/><stop offset="1" stop-color="#8c5527"/>
+            </linearGradient>
+          </defs>
+          <!-- sun -->
+          <circle cx="372" cy="72" r="34" fill="#e8b96a" opacity=".55"/>
+          <!-- distant hills -->
+          <path d="M0 250 Q90 196 175 238 T340 224 T460 248 L460 320 L0 320Z" fill="currentColor" opacity=".08"/>
+          <!-- ground -->
+          <path d="M0 268 Q120 254 236 266 T460 262 L460 320 L0 320Z" fill="currentColor" opacity=".14"/>
+          <!-- sauropod -->
+          <g fill="url(#sauro)">
+            <path d="M96 268c-4-22-2-44 10-58 14-16 40-22 62-16 16 4 26 14 30 26 3 9 2 18-2 26l16 2c10 1 14 8 12 15-2 6-9 9-16 8l-24-4c-8 6-19 9-30 9l4 20h-13l-5-20h-19l-5 20h-13l3-21c-4-2-8-4-11-7Z"/>
+            <path d="M198 220c-2-30 6-62 28-86 18-20 44-30 68-28 8 1 12 6 11 12-1 5-6 8-13 8-18-1-38 7-52 23-18 20-24 47-22 73Z"/>
+            <path d="M96 232c-16 4-34 0-46-12-9-9-13-22-11-34 1-6 6-9 11-8 5 1 8 6 7 11-1 7 1 14 7 19 8 8 21 10 32 7Z"/>
+          </g>
+          <!-- theropod -->
+          <g fill="url(#theropod)" transform="translate(238 96) scale(.92)">
+            <path d="M96 88c14-16 38-22 58-14 14 6 22 18 22 32 0 6-2 12-5 17l18 6c6 2 8 8 5 13-3 4-9 6-14 4l-22-8c-6 4-13 6-20 7l14 34h-14l-16-33-9 1-3 32h-13l3-34c-8-4-14-11-17-19Z"/>
+            <path d="M96 118C74 128 48 126 30 112c-13-10-20-26-19-42 1-6 6-10 11-9 5 1 8 6 7 12-1 10 4 20 13 27 13 10 32 11 47 4Z"/>
+            <circle cx="160" cy="98" r="4" fill="#1f1b16" opacity=".8"/>
+            <path d="M148 84c8-6 20-6 27 1l-3 4c-6-5-15-5-21-1Z" opacity=".35"/>
+          </g>
+          <!-- ferns -->
+          <g stroke="currentColor" stroke-width="2.5" fill="none" opacity=".28" stroke-linecap="round">
+            <path d="M30 300c0-18 6-32 16-42M30 300c0-14-8-24-18-30M30 300c0-12 10-20 20-22"/>
+            <path d="M424 302c0-16 6-28 15-37M424 302c0-13-8-22-17-27"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><b>~165M</b><span>Years of reign</span></div>
+      <div class="stat"><b>~1,100</b><span>Named genera</span></div>
+      <div class="stat"><b>~11,000</b><span>Living species (birds)</span></div>
+      <div class="stat"><b>66M</b><span>Years since impact</span></div>
+    </div>
+  </div>
+
+  <section id="eras">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Three periods, one era</h2>
+        <p>The Mesozoic ran from about 252 to 66 million years ago. Dinosaurs appear early in the Triassic, diversify through the Jurassic, and reach their greatest variety just before the end of the Cretaceous.</p>
+      </div>
+      <div class="timeline">
+        <div class="tl-track" role="img" aria-label="Timeline: Triassic 252 to 201, Jurassic 201 to 145, Cretaceous 145 to 66 million years ago">
+          <div class="tl-seg tri"><span>Triassic</span></div>
+          <div class="tl-seg jur"><span>Jurassic</span></div>
+          <div class="tl-seg cre"><span>Cretaceous</span></div>
+        </div>
+        <div class="tl-scale"><span>252 Ma</span><span>201 Ma</span><span>145 Ma</span><span>66 Ma</span></div>
+        <div class="tl-notes">
+          <div class="tl-note tri">
+            <h3>Triassic</h3>
+            <p>Pangaea is a single hot supercontinent. The first dinosaurs are small, fast, and bipedal — a minor group living alongside larger reptiles.</p>
+          </div>
+          <div class="tl-note jur">
+            <h3>Jurassic</h3>
+            <p>The supercontinent splits and the climate turns humid. Sauropods reach enormous sizes; the first birds take to the air.</p>
+          </div>
+          <div class="tl-note cre">
+            <h3>Cretaceous</h3>
+            <p>Flowering plants spread and continents take modern shape. Horned and duck-billed herbivores flourish under giant tyrannosaurs.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="guide">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>The field guide</h2>
+        <p>Eight of the best-known dinosaurs, with the details that actually distinguish them. Filter by period or by diet.</p>
+      </div>
+
+      <div class="filters" role="group" aria-label="Filter dinosaurs">
+        <button class="chip" data-filter="all" aria-pressed="true">All</button>
+        <button class="chip" data-filter="tri" aria-pressed="false">Triassic</button>
+        <button class="chip" data-filter="jur" aria-pressed="false">Jurassic</button>
+        <button class="chip" data-filter="cre" aria-pressed="false">Cretaceous</button>
+        <button class="chip" data-filter="carnivore" aria-pressed="false">Carnivores</button>
+        <button class="chip" data-filter="herbivore" aria-pressed="false">Herbivores</button>
+      </div>
+
+      <div class="grid" id="grid"></div>
+      <p class="empty" id="empty" hidden>No dinosaurs match that filter.</p>
+    </div>
+  </section>
+
+  <section id="extinction">
+    <div class="wrap">
+      <div class="panel">
+        <div class="measure">
+          <h2>How it ended</h2>
+          <p>About 66 million years ago an asteroid roughly 10 km across struck what is now the Yucatán Peninsula, leaving the Chicxulub crater. The impact threw enough rock vapour and sulfate aerosol into the atmosphere to block sunlight for years.</p>
+          <p>Photosynthesis collapsed first, then the food chains built on it. Around three quarters of species died out, including every non-avian dinosaur. Massive volcanic eruptions in the Deccan Traps had already been stressing the climate, which is why the impact fell on an ecosystem with little margin left.</p>
+          <p>One lineage survived: small, feathered, beaked theropods. Every bird alive today — from a hummingbird to an ostrich — is a dinosaur, which makes the group one of the most successful in the history of vertebrate life rather than a story that simply ended.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>🦕 Dinosaurs — a field guide to the Mesozoic.</span>
+    <span class="spacer">Built with GitHub Pages · <a href="https://github.com/family-dental-care-spring/family-dental-care-spring.github.io">Source</a></span>
+  </div>
+</footer>
+
+<script>
+const ART = {
+  theropod: `<svg viewBox="0 0 240 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g fill="currentColor"><path d="M84 92c12-16 34-24 54-18 15 5 24 17 24 31 0 6-2 12-5 17l19 6c6 2 8 8 5 12-3 5-9 6-14 4l-23-8c-6 4-13 7-20 8l15 32h-14l-17-32-9 1-3 31H83l3-33c-8-5-14-12-16-21Z"/><path d="M84 120c-22 10-48 8-66-6C5 104-2 88 0 72c1-6 6-10 11-9s8 7 7 12c-1 10 4 20 13 27 13 10 33 11 48 4Z"/><path d="M146 96c-4 0-7-3-7-7s3-7 7-7 7 3 7 7-3 7-7 7Z" opacity=".35"/></g></svg>`,
+  sauropod: `<svg viewBox="0 0 240 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g fill="currentColor"><path d="M62 138c-5-24-2-48 12-63 16-17 45-24 70-17 18 5 29 16 33 29 3 10 2 19-3 28l19 2c11 2 15 9 13 16-3 7-11 10-19 8l-27-4c-9 6-21 10-34 10l5 21h-15l-6-21h-21l-6 21H68l3-23c-4-2-7-4-9-7Z"/><path d="M177 84c-3-33 7-68 31-94 5-6 12-6 16-1 3 4 2 10-3 15-19 21-27 51-25 80Z"/><path d="M62 100c-18 4-38 0-51-13C0 76-4 61-2 48c1-7 7-11 12-9 5 1 8 7 7 13-1 8 2 16 8 22 9 9 23 11 37 8Z"/></g></svg>`,
+  stego: `<svg viewBox="0 0 240 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g fill="currentColor"><path d="M56 128c-6-22-2-44 12-57 18-17 48-21 72-13 16 5 26 16 29 29 2 9 0 18-5 26l6 1c9 1 12 8 10 14-3 6-10 9-17 7l-14-3c-8 5-18 8-28 9l4 20h-14l-5-20h-20l-5 20H67l3-22c-6-3-11-7-14-11Z"/><path d="M74 68c4-14 12-24 22-28-2 12-8 22-16 28Zm26-32c8-11 19-18 30-19-5 11-14 19-24 23Zm38-18c10-6 22-8 32-4-9 8-20 12-30 12Z"/><path d="M56 104c-16 3-33-1-44-13-8-9-11-21-8-32 2-6 8-9 13-7 5 2 7 8 5 14-2 6 0 13 5 18 7 8 18 10 29 8Z"/><path d="M182 128l16 12-4 5-16-11Zm4-10l17 8-2 6-17-7Z"/></g></svg>`,
+  ceratopsian: `<svg viewBox="0 0 240 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g fill="currentColor"><path d="M40 130c-6-24-2-46 13-59 20-17 52-20 76-11 14 5 23 14 27 26 2 8 1 16-3 23l4 1c8 2 11 9 8 15-3 5-10 8-16 6l-12-3c-9 5-19 8-30 9l4 20h-14l-5-20H72l-5 20H53l3-22c-7-3-12-8-16-13Z"/><path d="M136 60c14-18 34-28 55-26 10 1 16 8 15 16-1 7-8 11-16 10-15-2-31 5-42 18Z"/><path d="M186 46c8-10 20-16 32-15-6 10-17 16-28 18Z" opacity=".5"/><path d="M40 106c-16 3-33-2-43-14C-11 83-14 71-11 60c2-6 8-9 13-7 5 2 7 8 5 13-2 6 0 13 5 18 7 8 17 11 28 9Z"/></g></svg>`,
+  raptor: `<svg viewBox="0 0 240 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g fill="currentColor"><path d="M78 96c10-14 29-21 47-17 13 4 21 14 21 26 0 5-2 10-4 14l16 5c5 2 7 7 4 11-2 4-7 5-12 3l-19-6c-5 4-12 6-18 7l13 27h-12l-15-27-8 1-2 26H78l3-28c-7-4-12-11-14-18Z"/><path d="M78 118c-19 9-42 7-58-5C7 104 1 90 3 76c1-5 5-9 10-8 4 1 7 6 6 11-1 9 4 17 11 23 11 9 28 10 41 3Z"/><path d="M92 74c-6-14-4-30 6-42 3 14 2 29-6 42Zm18-6c-2-15 3-30 15-40-1 15-6 29-15 40Z" opacity=".55"/><circle cx="133" cy="99" r="3.5" opacity=".4"/></g></svg>`,
+  ornithopod: `<svg viewBox="0 0 240 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g fill="currentColor"><path d="M70 100c10-18 32-27 53-22 15 4 25 15 26 29 1 7-1 13-5 19l17 5c6 2 8 8 5 12-3 4-9 6-14 4l-20-7c-6 4-13 7-21 8l14 30h-13l-16-30-9 1-3 29H71l3-31c-7-5-12-14-14-23Z"/><path d="M70 124c-20 10-45 8-62-5C-5 109-11 94-9 79c1-6 6-10 11-9s8 7 7 12c-1 10 4 19 11 25 12 9 30 10 43 4Z"/><path d="M140 68c10-14 24-22 38-21-5 13-16 22-29 26Z"/><circle cx="128" cy="88" r="3.5" opacity=".4"/></g></svg>`
+};
+
+const DINOS = [
+  { name: "Coelophysis", pron: "see-lo-FY-sis", art: "theropod", period: "tri", periodLabel: "Triassic",
+    diet: "carnivore", length: "3 m", mass: "20 kg", when: "215–200 Ma", found: "New Mexico, USA",
+    blurb: "One of the earliest well-known dinosaurs. Hollow-boned, whip-fast, and found by the hundreds at Ghost Ranch — a whole herd buried in a single flood." },
+  { name: "Plateosaurus", pron: "PLAT-ee-oh-SORE-us", art: "sauropod", period: "tri", periodLabel: "Triassic",
+    diet: "herbivore", length: "8 m", mass: "4 t", when: "214–204 Ma", found: "Germany, Switzerland",
+    blurb: "A long-necked browser that walked on two legs — the body plan that sauropods would later scale up to enormous four-legged sizes." },
+  { name: "Brachiosaurus", pron: "BRACK-ee-oh-SORE-us", art: "sauropod", period: "jur", periodLabel: "Jurassic",
+    diet: "herbivore", length: "22 m", mass: "40 t", when: "154–150 Ma", found: "Colorado, USA",
+    blurb: "Front legs longer than the back, tilting the whole animal upward like a giraffe. Its nostrils sat high on a domed crest above the eyes." },
+  { name: "Stegosaurus", pron: "STEG-oh-SORE-us", art: "stego", period: "jur", periodLabel: "Jurassic",
+    diet: "herbivore", length: "9 m", mass: "5 t", when: "155–145 Ma", found: "Western USA, Portugal",
+    blurb: "Seventeen bony plates down the back and four tail spikes — the thagomizer — used against predators. Its brain was famously the size of a lime." },
+  { name: "Allosaurus", pron: "AL-oh-SORE-us", art: "theropod", period: "jur", periodLabel: "Jurassic",
+    diet: "carnivore", length: "9 m", mass: "2 t", when: "155–145 Ma", found: "Morrison Fm., USA",
+    blurb: "The dominant Jurassic hunter, with blade-like teeth and a light skull built to strike downward like a hatchet rather than crush." },
+  { name: "Velociraptor", pron: "veh-LOSS-ih-RAP-tor", art: "raptor", period: "cre", periodLabel: "Cretaceous",
+    diet: "carnivore", length: "2 m", mass: "15 kg", when: "75–71 Ma", found: "Mongolia",
+    blurb: "Turkey-sized and fully feathered, not the scaly giant of film. One famous fossil preserves it locked mid-fight with a Protoceratops." },
+  { name: "Triceratops", pron: "try-SERRA-tops", art: "ceratopsian", period: "cre", periodLabel: "Cretaceous",
+    diet: "herbivore", length: "9 m", mass: "8 t", when: "68–66 Ma", found: "Western N. America",
+    blurb: "Three horns and a solid bone frill, on a skull up to 2.5 m long — among the largest skulls of any land animal ever. One of the last dinosaurs standing." },
+  { name: "Tyrannosaurus rex", pron: "tie-RAN-oh-SORE-us", art: "theropod", period: "cre", periodLabel: "Cretaceous",
+    diet: "carnivore", length: "12 m", mass: "8 t", when: "68–66 Ma", found: "Western N. America",
+    blurb: "A bite force near 35,000 newtons — strong enough to crush bone — paired with binocular vision and a huge olfactory bulb for tracking prey." }
+];
+
+const grid = document.getElementById("grid");
+const empty = document.getElementById("empty");
+
+grid.innerHTML = DINOS.map(d => `
+  <article class="card" data-period="${d.period}" data-diet="${d.diet}">
+    <div class="card-art" style="color:var(--${d.period === 'tri' ? 'triassic' : d.period === 'jur' ? 'jurassic' : 'cretaceous'})">${ART[d.art]}</div>
+    <div class="card-body">
+      <div>
+        <h3>${d.name}</h3>
+        <div class="pron">${d.pron}</div>
+      </div>
+      <p>${d.blurb}</p>
+      <div class="facts">
+        <div class="fact"><span>Length</span>${d.length}</div>
+        <div class="fact"><span>Mass</span>${d.mass}</div>
+        <div class="fact"><span>Lived</span>${d.when}</div>
+        <div class="fact"><span>Found</span>${d.found}</div>
+      </div>
+      <div class="tags">
+        <span class="tag period ${d.period}">${d.periodLabel}</span>
+        <span class="tag">${d.diet}</span>
+      </div>
+    </div>
+  </article>`).join("");
+
+const chips = [...document.querySelectorAll(".chip")];
+chips.forEach(chip => chip.addEventListener("click", () => {
+  chips.forEach(c => c.setAttribute("aria-pressed", String(c === chip)));
+  const f = chip.dataset.filter;
+  let shown = 0;
+  [...grid.children].forEach(card => {
+    const match = f === "all" || card.dataset.period === f || card.dataset.diet === f;
+    card.hidden = !match;
+    if (match) shown++;
+  });
+  empty.hidden = shown > 0;
+}));
+</script>
+</body>
+</html>
