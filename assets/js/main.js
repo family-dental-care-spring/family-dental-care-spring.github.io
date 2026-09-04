@@ -75,6 +75,56 @@ const HeroSlider = (() => {
   return { goTo, step };
 })();
 
+const ScrollProgress = (() => {
+  if (REDUCE_MOTION) return null;
+  const doc = document.documentElement;
+  if (doc.scrollHeight - doc.clientHeight <= 0) return null; // page isn't scrollable
+
+  const bar = document.createElement('div');
+  bar.className = 'scroll-progress';
+  bar.setAttribute('aria-hidden', 'true');
+  document.body.prepend(bar);
+
+  let ticking = false;
+  let idleTimer = null;
+  function update() {
+    const max = doc.scrollHeight - doc.clientHeight;
+    if (max <= 0) { bar.classList.add('is-hidden'); ticking = false; return; }
+    const pct = (window.scrollY / max) * 100;
+    bar.style.width = `${pct}%`;
+    bar.classList.remove('is-idle');
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(() => bar.classList.add('is-idle'), 2000);
+    ticking = false;
+  }
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  }, { passive: true });
+  update();
+  return null;
+})();
+
+const LuxeMotion = (() => {
+  const heroImg = document.getElementById('heroParallaxImg');
+  if (!heroImg) return null;
+  if (REDUCE_MOTION) return null;
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const y = Math.min(window.scrollY * 0.25, 140);
+      heroImg.style.setProperty('--parallax-y', `${y}px`);
+      ticking = false;
+    });
+  }, { passive: true });
+
+  return null;
+})();
+
 /**
  * Quick contact form (home page only): intercepts submit for this
  * static-hosted site and shows an inline confirmation message.
@@ -162,7 +212,7 @@ const QuickContactForm = (() => {
     'scroll',
     () => {
       scrollTopBtn?.classList.toggle('show', window.scrollY > 500);
-      header?.classList.toggle('scrolled', window.scrollY > 8);
+      header?.classList.toggle('scrolled', window.scrollY > 50);
     },
     { passive: true }
   );
@@ -285,6 +335,44 @@ const Testimonials = (() => {
 
   render();
   return { TESTIMONIALS };
+})();
+
+/**
+ * Video testimonial modal: clicking a "Real Patient Stories" thumbnail opens
+ * its clip in a lightbox player. No-ops if the page has no video-play buttons.
+ */
+const VideoTestimonials = (() => {
+  const buttons = document.querySelectorAll('.video-play');
+  const modal = document.getElementById('videoModal');
+  if (!buttons.length || !modal) return null;
+
+  const player = document.getElementById('videoModalPlayer');
+
+  function open(src, poster) {
+    player.src = src;
+    if (poster) player.poster = poster;
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    player.play().catch(() => {});
+  }
+
+  function close() {
+    modal.hidden = true;
+    player.pause();
+    player.removeAttribute('src');
+    player.load();
+    document.body.style.overflow = '';
+  }
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => open(btn.dataset.video, btn.dataset.poster));
+  });
+  modal.querySelectorAll('[data-close]').forEach((el) => el.addEventListener('click', close));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal.hidden) close();
+  });
+
+  return { open, close };
 })();
 
 /**
