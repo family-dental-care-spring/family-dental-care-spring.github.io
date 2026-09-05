@@ -29,6 +29,8 @@ const HeroSlider = (() => {
     dots: document.querySelectorAll('[data-slide-dot]'),
     prev: document.querySelector('[data-slide-prev]'),
     next: document.querySelector('[data-slide-next]'),
+    bgSlides: document.querySelectorAll('[data-slide-bg]'),
+    portraitSlides: document.querySelectorAll('[data-slide-portrait]'),
   };
 
   if (!els.title || !els.sub || !els.eyebrow) return null; // no slider on this page
@@ -48,6 +50,12 @@ const HeroSlider = (() => {
       els.sub.style.opacity = 1;
     }, TRANSITION_MS);
     els.dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+    els.bgSlides.forEach((bg) => bg.classList.toggle('active', Number(bg.dataset.slideBg) === index));
+    els.portraitSlides.forEach((vid) => {
+      const isActive = Number(vid.dataset.slidePortrait) === index;
+      vid.classList.toggle('active', isActive);
+      if (isActive) vid.play().catch(() => {});
+    });
   }
 
   function goTo(i) {
@@ -373,6 +381,46 @@ const VideoTestimonials = (() => {
   });
 
   return { open, close };
+})();
+
+/**
+ * Subtle 3D tilt on hover for media tiles (gallery photos, video/testimonial
+ * cards, the No Cavity Club mosaic). Tracks the cursor position over each
+ * tile and applies a gentle rotateX/rotateY, layered on top of the existing
+ * lift + gold-ring hover from CSS. No-ops on touch devices and when the user
+ * prefers reduced motion.
+ */
+const TiltEffect = (() => {
+  const tiles = document.querySelectorAll('.gallery-item, .cavity-tile, .video-testi-card');
+  if (!tiles.length || REDUCE_MOTION) return null;
+  if (window.matchMedia('(hover: none), (pointer: coarse)').matches) return null;
+
+  const MAX_TILT = 6; // degrees — kept small so it reads as premium, not gimmicky
+  const LIFT = -6; // px, matches the CSS hover lift it replaces
+
+  tiles.forEach((tile) => {
+    tile.style.willChange = 'transform';
+
+    tile.addEventListener('mouseenter', () => {
+      tile.style.transitionDuration = '.1s';
+    });
+
+    tile.addEventListener('mousemove', (e) => {
+      const rect = tile.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const rotateX = ((y - rect.height / 2) / (rect.height / 2)) * -MAX_TILT;
+      const rotateY = ((x - rect.width / 2) / (rect.width / 2)) * MAX_TILT;
+      tile.style.transform = `perspective(800px) translateY(${LIFT}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.015)`;
+    });
+
+    tile.addEventListener('mouseleave', () => {
+      tile.style.transitionDuration = '.4s';
+      tile.style.transform = '';
+    });
+  });
+
+  return null;
 })();
 
 /**
