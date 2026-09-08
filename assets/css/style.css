@@ -516,10 +516,10 @@ h2::after {
   transition: box-shadow .35s var(--ease);
 }
 .staff-panel:hover { box-shadow: var(--shadow-lg); }
-@media (min-width: 860px) { .staff-panel { grid-template-columns: .8fr 1.2fr; } }
+@media (min-width: 860px) { .staff-panel { grid-template-columns: 1fr 1.2fr; } }
 .staff-photo {
   background: var(--logo-navy);
-  min-height: 340px; position: relative; overflow: hidden;
+  min-height: 460px; position: relative; overflow: hidden;
   border-right: 5px solid var(--green); transition: border-color .35s var(--ease);
 }
 .staff-panel:hover .staff-photo { border-right-color: var(--gold); }
@@ -539,7 +539,9 @@ h2::after {
 }
 
 /* ---------- associate dentist cards ---------- */
-.associate-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.75rem; margin-top: 2.5rem; }
+.associate-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem; margin-top: 2.5rem; }
+@media (max-width: 900px) { .associate-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .associate-grid { grid-template-columns: 1fr; } }
 .associate-card {
   background: var(--bg-raised); border: 1px solid var(--line); border-radius: var(--radius);
   padding: 2rem 1.5rem; text-align: center; box-shadow: var(--shadow-sm);
@@ -586,9 +588,12 @@ h2::after {
 /* Smile gallery */
 .gallery-caption { text-align: center; color: var(--ink-soft); margin: 0 0 2rem; font-size: 1rem; }
 .smile-gallery-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.1rem; align-items: start;
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 1.1rem;
 }
-@media (max-width: 720px) { .smile-gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+.smile-gallery-grid .gallery-item { flex: 0 0 calc(25% - .825rem); }
+@media (max-width: 900px) { .smile-gallery-grid .gallery-item { flex-basis: calc(33.333% - .734rem); } }
+@media (max-width: 720px) { .smile-gallery-grid .gallery-item { flex-basis: calc(50% - .55rem); } }
+@media (max-width: 560px) { .smile-gallery-grid { gap: .7rem; } .smile-gallery-grid .gallery-item { flex-basis: calc(50% - .35rem); } }
 .gallery-item {
   display: block; position: relative; aspect-ratio: 1 / 1; overflow: hidden;
   border-radius: var(--radius-sm); border: 1px solid var(--line); box-shadow: var(--shadow-sm);
@@ -633,6 +638,8 @@ h2::after {
 }
 .before-after-card img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; transition: transform .5s var(--ease); }
 .before-after-card:hover img { transform: scale(1.06); }
+.before-after-card.is-composite img { object-fit: contain; background: #fff; }
+.before-after-card.is-composite:hover img { transform: scale(1.02); }
 .before-after-tag {
   position: absolute; top: 1rem; left: 1rem; background: var(--green-dark); color: #ffffff;
   font: 700 .72rem/1 "Montserrat", ui-sans-serif, system-ui, sans-serif; text-transform: uppercase; letter-spacing: .07em;
@@ -1263,7 +1270,7 @@ header.site.scrolled .brand-logo { height: 60px; }
 .staff-luxe-blur { display: none; }
 .staff-luxe-visual { position: relative; z-index: 1; display: flex; justify-content: center; }
 .staff-luxe-frame {
-  background: #fff; padding: 10px; max-width: 280px; width: 100%; border: 5px solid var(--green);
+  background: #fff; padding: 10px; max-width: 420px; width: 100%; border: 5px solid var(--green);
   box-shadow: var(--shadow-sm); transform: rotate(-1.5deg); overflow: hidden;
   transition: transform .4s var(--ease), border-color .4s var(--ease), box-shadow .4s var(--ease);
 }
