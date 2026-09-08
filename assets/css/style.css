@@ -1160,12 +1160,12 @@ footer.site .foot-bottom a { color: #7fa9a3; }
 .welcome-luxe {
   display: grid; grid-template-columns: 1fr; gap: clamp(2.5rem, 6vw, 5rem); align-items: center; position: relative;
 }
-@media (min-width: 900px) { .welcome-luxe { grid-template-columns: .82fr 1fr; } }
+@media (min-width: 900px) { .welcome-luxe { grid-template-columns: 1fr 1fr; } }
 .welcome-luxe-visual { position: relative; min-height: 280px; display: flex; align-items: center; justify-content: center; }
 .welcome-luxe-glow { display: none; }
 .polaroid {
   position: relative; z-index: 1; background: #fff; padding: 14px 14px 46px;
-  border: 1px solid var(--line); max-width: 300px;
+  border: 1px solid var(--line); max-width: 480px; width: 100%;
 }
 .polaroid img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: contain; background: var(--bg-sunken); }
 .polaroid figcaption {
