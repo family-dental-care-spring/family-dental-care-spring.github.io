@@ -392,7 +392,10 @@ const BioModal = (() => {
       title: 'Associate Doctor',
       img: 'assets/img/dr-pham.jpg',
       paragraphs: [
-        'Dr. Pham believes in taking the time to explain findings and treatment options in an easy-to-understand way. Rather than taking a one-size-fits-all approach, he believes patients should understand their options and have an active role in making decisions about their dental care.',
+        'Dr. Brandon Pham earned his undergraduate degree in Biochemistry from the University of Houston before receiving his Doctor of Dental Surgery degree from UTHealth School of Dentistry at Houston.',
+        'Dr. Pham enjoys all aspects of general and family dentistry, with a particular interest in restorative care. He is committed to continuing his education and expanding his clinical skills, with current areas of focus including implant dentistry and clear aligner therapy.',
+        'At the heart of Dr. Pham’s approach to dentistry is creating an environment where patients feel comfortable, confident, and free from judgment. He understands that every patient comes to the dentist with a different background—whether they maintain regular dental visits or are returning after many years away. His calm and gentle approach is focused on making dentistry feel less intimidating.',
+        'Dr. Pham strongly believes in patient education and takes the time to explain findings and treatment options in an easy-to-understand way. Rather than taking a one-size-fits-all approach, he believes patients should understand their options and have an active role in making decisions about their dental care.',
         'Dr. Pham is a member of the American Dental Association, Texas Dental Association, Greater Houston Dental Society, and Academy of General Dentistry.',
         'Originally from Mississippi, Dr. Pham enjoys staying active at the gym, trying different foods, and watching movies and anime outside of dentistry. He is excited to be part of the team at Family Dental Care of Spring and looks forward to getting to know his patients and building lasting relationships with them and their families.',
       ],
@@ -406,6 +409,34 @@ const BioModal = (() => {
         'My core philosophy is simple: I treat every patient with the same gentle care, compassion, and respect that I would provide to my own family. I believe that true oral health comes from comprehensive care and patient education. I treat both children and adults, focusing heavily on cosmetic and restorative dentistry. For me, the ultimate reward of this profession is helping someone get out of pain and witnessing the transformation of a beautiful, healthy smile.',
         'Outside of the clinic, I love staying active and spending quality time with my family. You can often find me traveling to new places, cooking, working out, watching movies, or spending time outdoors doing yard work. Giving back is also incredibly important to me, and I cherish volunteering each year to help prepare Thanksgiving dinners at our local community church for the poor and homeless.',
         'I look forward to welcoming you to our wonderful clinic. Let’s take this journey together to maintain a lifetime of beautiful, healthy smiles!',
+      ],
+    },
+    khadija: {
+      name: 'Dr. Duha Abou Khadija',
+      title: 'Associate Doctor',
+      img: 'assets/img/dr-khadija.jpg',
+      paragraphs: [
+        'Dr. Duha Abou Khadija earned her Bachelor’s degree in Biomedical Sciences from the University of South Florida and her Doctor of Dental Surgery degree from Creighton University School of Dentistry. She is passionate about providing personalized, comprehensive dental care in a warm and welcoming environment. Dr. Abou Khadija believes in caring for each patient as a whole and getting to know the person behind the smile. She takes the time to listen, understand each patient’s needs and concerns, and create a comfortable experience where patients feel heard, valued, and genuinely cared for.',
+        'Her clinical interests include general, restorative, and cosmetic dentistry, crowns and bridges, dentures, implant restorations, Invisalign and clear aligner treatment, and family dentistry. She is also certified in nitrous oxide sedation and is dedicated to providing gentle, comfortable, and comprehensive care. She takes a patient-centered approach focused on preserving natural teeth, restoring function, and creating healthy, beautiful, natural-looking smiles. She especially enjoys building meaningful relationships with her patients and their families and helping them feel confident in their smiles.',
+        'Outside of dentistry, Dr. Abou Khadija enjoys spending time with her family, traveling, and creating meaningful memories with the people she loves.',
+        'Dr. Abou Khadija looks forward to welcoming you and your family to the practice. She is honored to care for her patients and looks forward to building lasting relationships while being part of their dental journey for years to come.',
+      ],
+      lists: [
+        {
+          heading: 'Professional Associations',
+          items: ['American Dental Association (ADA)', 'Texas Dental Association (TDA)', 'American Academy of Cosmetic Dentistry (AACD)'],
+        },
+        {
+          heading: 'Achievements',
+          items: [
+            'Cum Laude Honor Graduate — Creighton University School of Dentistry',
+            'Magna Cum Laude Graduate — University of South Florida',
+          ],
+        },
+        {
+          heading: 'Volunteer & Service Experience',
+          items: ['Give Kids A Smile', 'Dental Mission Trips'],
+        },
       ],
     },
   };
@@ -422,7 +453,12 @@ const BioModal = (() => {
     img.alt = bio.name;
     title.textContent = bio.title;
     name.textContent = bio.name;
-    text.innerHTML = bio.paragraphs.map((p) => `<p>${p}</p>`).join('');
+    const paragraphsHtml = bio.paragraphs.map((p) => `<p>${p}</p>`).join('');
+    const listsHtml = (bio.lists || []).map((section) => `
+      <h4>${section.heading}</h4>
+      <ul>${section.items.map((item) => `<li>${item}</li>`).join('')}</ul>
+    `).join('');
+    text.innerHTML = paragraphsHtml + listsHtml;
     modal.hidden = false;
     document.body.style.overflow = 'hidden';
   }
