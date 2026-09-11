@@ -783,6 +783,49 @@ h2::after {
 }
 .video-modal-close:hover { background: rgba(255,255,255,.3); }
 
+/* ---------- associate card "read more" trigger ---------- */
+.btn-read-more {
+  display: inline-flex; align-items: center; gap: .35rem; margin-top: 1rem;
+  background: none; border: 0; padding: 0; cursor: pointer;
+  font: 700 .74rem/1 "Montserrat", ui-sans-serif, system-ui, sans-serif; text-transform: uppercase; letter-spacing: .08em;
+  color: var(--green-dark); transition: color .2s var(--ease);
+}
+.btn-read-more svg { width: 13px; height: 13px; transform: rotate(-90deg); transition: transform .25s var(--ease); }
+.btn-read-more:hover { color: var(--gold-dark); }
+.btn-read-more:hover svg { transform: rotate(-90deg) translateX(3px); }
+
+/* ---------- doctor bio modal ---------- */
+.bio-modal { position: fixed; inset: 0; z-index: 300; display: flex; align-items: center; justify-content: center; padding: 1.5rem; }
+.bio-modal[hidden] { display: none; }
+.bio-modal-backdrop { position: absolute; inset: 0; background: rgba(8,14,20,.86); backdrop-filter: blur(3px); }
+.bio-modal-box {
+  position: relative; width: 100%; max-width: 900px; max-height: 88vh; overflow: hidden;
+  background: var(--bg-raised); border-radius: var(--radius); box-shadow: var(--shadow-lg);
+  display: grid; grid-template-columns: 1fr;
+}
+@media (min-width: 720px) { .bio-modal-box { grid-template-columns: .8fr 1.2fr; } }
+.bio-modal-photo { position: relative; min-height: 220px; background: var(--logo-navy); overflow: hidden; }
+.bio-modal-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 18%; }
+.bio-modal-photo::after {
+  content: ""; position: absolute; inset: 0; border-right: 4px solid var(--gold); pointer-events: none;
+}
+@media (max-width: 719px) { .bio-modal-photo::after { border-right: none; border-bottom: 4px solid var(--gold); } }
+.bio-modal-content { padding: clamp(1.6rem, 4vw, 2.6rem); overflow-y: auto; max-height: 88vh; }
+.bio-modal-content .title {
+  color: var(--accent-dark); font: 700 .78rem/1 "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  text-transform: uppercase; letter-spacing: .1em; display: block; margin-bottom: .5rem;
+}
+.bio-modal-content h3 { font: 800 clamp(1.5rem, 3vw, 2rem)/1.15 "Playfair Display", serif; margin: 0 0 1.2rem; position: relative; padding-bottom: .9rem; }
+.bio-modal-content h3::after { content: ""; position: absolute; left: 0; bottom: 0; width: 48px; height: 3px; background: var(--gold); }
+.bio-modal-text p { color: var(--ink-soft); margin: 0 0 1rem; line-height: 1.7; font-size: .95rem; }
+.bio-modal-text p:last-child { margin-bottom: 0; }
+.bio-modal-close {
+  position: absolute; top: 14px; right: 14px; z-index: 1; width: 38px; height: 38px; border-radius: 50%; border: 0;
+  background: rgba(8,14,20,.4); color: #fff; font-size: 1.5rem; line-height: 1; cursor: pointer;
+  transition: background .2s var(--ease), transform .2s var(--ease);
+}
+.bio-modal-close:hover { background: var(--gold-dark); transform: rotate(90deg); }
+
 /* ---------- cta band ---------- */
 .cta-band {
   background: var(--logo-navy); color: #ffffff; text-align: center;
