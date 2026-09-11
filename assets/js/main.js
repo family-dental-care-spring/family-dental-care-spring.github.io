@@ -376,6 +376,74 @@ const VideoTestimonials = (() => {
 })();
 
 /**
+ * Full-bio popup for associate doctor cards (staff.html only). Clicking
+ * "Read More" on a doctor's card opens a shared modal with their photo,
+ * title, and full bio text. No-ops if the modal or trigger buttons aren't
+ * present on the page.
+ */
+const BioModal = (() => {
+  const buttons = document.querySelectorAll('.btn-read-more');
+  const modal = document.getElementById('bioModal');
+  if (!buttons.length || !modal) return null;
+
+  const BIOS = {
+    pham: {
+      name: 'Dr. Brandon Pham',
+      title: 'Associate Doctor',
+      img: 'assets/img/dr-pham.jpg',
+      paragraphs: [
+        'Dr. Pham believes in taking the time to explain findings and treatment options in an easy-to-understand way. Rather than taking a one-size-fits-all approach, he believes patients should understand their options and have an active role in making decisions about their dental care.',
+        'Dr. Pham is a member of the American Dental Association, Texas Dental Association, Greater Houston Dental Society, and Academy of General Dentistry.',
+        'Originally from Mississippi, Dr. Pham enjoys staying active at the gym, trying different foods, and watching movies and anime outside of dentistry. He is excited to be part of the team at Family Dental Care of Spring and looks forward to getting to know his patients and building lasting relationships with them and their families.',
+      ],
+    },
+    nguyen: {
+      name: 'Dr. Mai Nguyen',
+      title: 'Associate Doctor',
+      img: 'assets/img/dr-nguyen.jpg',
+      paragraphs: [
+        'My journey in dental medicine began when I graduated from the UTHealth Houston School of Dentistry in 2004 with my Doctor of Dental Surgery (DDS) degree. Dentistry is an ever-evolving field, which is why I am deeply committed to staying at the forefront of modern advancements through extensive yearly continuing education. This dedication allows me to offer advanced treatments, including certifications in dental implants and Invisalign, ensuring my patients receive the highest standard of care.',
+        'My core philosophy is simple: I treat every patient with the same gentle care, compassion, and respect that I would provide to my own family. I believe that true oral health comes from comprehensive care and patient education. I treat both children and adults, focusing heavily on cosmetic and restorative dentistry. For me, the ultimate reward of this profession is helping someone get out of pain and witnessing the transformation of a beautiful, healthy smile.',
+        'Outside of the clinic, I love staying active and spending quality time with my family. You can often find me traveling to new places, cooking, working out, watching movies, or spending time outdoors doing yard work. Giving back is also incredibly important to me, and I cherish volunteering each year to help prepare Thanksgiving dinners at our local community church for the poor and homeless.',
+        'I look forward to welcoming you to our wonderful clinic. Let’s take this journey together to maintain a lifetime of beautiful, healthy smiles!',
+      ],
+    },
+  };
+
+  const img = document.getElementById('bioModalImg');
+  const title = document.getElementById('bioModalTitle');
+  const name = document.getElementById('bioModalName');
+  const text = document.getElementById('bioModalText');
+
+  function open(key) {
+    const bio = BIOS[key];
+    if (!bio) return;
+    img.src = bio.img;
+    img.alt = bio.name;
+    title.textContent = bio.title;
+    name.textContent = bio.name;
+    text.innerHTML = bio.paragraphs.map((p) => `<p>${p}</p>`).join('');
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    modal.hidden = true;
+    document.body.style.overflow = '';
+  }
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => open(btn.dataset.bio));
+  });
+  modal.querySelectorAll('[data-close]').forEach((el) => el.addEventListener('click', close));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal.hidden) close();
+  });
+
+  return { open, close };
+})();
+
+/**
  * Subtle 3D tilt on hover for media tiles (gallery photos, video/testimonial
  * cards, the No Cavity Club mosaic). Tracks the cursor position over each
  * tile and applies a gentle rotateX/rotateY, layered on top of the existing
