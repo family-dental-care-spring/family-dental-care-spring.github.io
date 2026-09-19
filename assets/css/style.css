@@ -285,6 +285,21 @@ header.site .btn-ghost:hover { border-color: var(--green); color: var(--green); 
 .trust-item span { display: block; font: 700 .72rem/1.4 "Montserrat", ui-sans-serif, system-ui, sans-serif; color: var(--ink-faint); text-transform: uppercase; letter-spacing: .06em; margin-top: .25rem; }
 
 /* ---------- contact bar ---------- */
+.contact-info-strip { background: var(--bg-sunken); border-bottom: 1px solid var(--line); padding: .9rem 0; }
+.contact-info-strip .wrap {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .5rem 1.4rem;
+  font-size: .85rem; color: var(--ink-soft);
+}
+.contact-info-strip svg { width: 15px; height: 15px; flex: none; }
+.contact-info-strip .cis-brand, .contact-info-strip .cis-address, .contact-info-strip .cis-phone {
+  display: inline-flex; align-items: center; gap: .4rem;
+}
+.contact-info-strip .cis-brand { font-weight: 700; color: var(--ink); }
+.contact-info-strip .cis-sep { opacity: .4; }
+.contact-info-strip .cis-phone { color: var(--green-dark); font-weight: 700; text-decoration: none; transition: color .2s var(--ease); }
+.contact-info-strip .cis-phone:hover { color: var(--gold-dark); }
+@media (max-width: 640px) { .contact-info-strip .cis-address { display: none; } }
+
 .contact-bar {
   position: relative; color: #fff; padding: 4rem 0;
   background: var(--logo-navy); border-top: 5px solid var(--green);
@@ -519,13 +534,13 @@ h2::after {
 @media (min-width: 860px) { .staff-panel { grid-template-columns: 1fr 1.2fr; } }
 .staff-photo {
   background: var(--logo-navy);
-  min-height: 460px; position: relative; overflow: hidden;
+  min-height: 640px; position: relative; overflow: hidden;
   border-right: 5px solid var(--green); transition: border-color .35s var(--ease);
 }
 .staff-panel:hover .staff-photo { border-right-color: var(--gold); }
 .staff-photo .avatar {
   position: absolute; inset: 0; width: 100%; height: 100%;
-  object-fit: cover; object-position: center 18%; transition: transform .6s var(--ease);
+  object-fit: cover; object-position: center top; transition: transform .6s var(--ease);
 }
 .staff-panel:hover .staff-photo .avatar { transform: scale(1.04); }
 .staff-copy { padding: 2.2rem 2.4rem; }
@@ -538,28 +553,6 @@ h2::after {
   background: var(--bg-sunken); color: var(--ink-soft); border: 1px solid var(--line);
 }
 
-/* ---------- associate dentist cards ---------- */
-.associate-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.75rem; margin-top: 2.5rem; }
-.associate-grid .associate-card { flex: 0 0 calc(33.333% - 1.167rem); }
-@media (max-width: 900px) { .associate-grid .associate-card { flex-basis: calc(50% - .875rem); } }
-@media (max-width: 560px) { .associate-grid .associate-card { flex-basis: 100%; } }
-.associate-card {
-  background: var(--bg-raised); border: 1px solid var(--line); border-radius: var(--radius);
-  padding: 2rem 1.5rem; text-align: center; box-shadow: var(--shadow-sm);
-  transition: transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s var(--ease);
-}
-.associate-card:hover { transform: translateY(-4px); border-color: var(--gold); box-shadow: var(--shadow-lg); }
-.associate-card img {
-  width: 140px; height: 140px; border-radius: 50%; object-fit: cover; object-position: center 15%;
-  margin: 0 auto 1.2rem; display: block; border: 4px solid var(--green); transition: border-color .3s var(--ease);
-}
-.associate-card:hover img { border-color: var(--gold); }
-.associate-card .title {
-  color: var(--accent-dark); font: 700 .78rem/1 "Montserrat", ui-sans-serif, system-ui, sans-serif;
-  text-transform: uppercase; letter-spacing: .08em; display: block; margin-bottom: .5rem;
-}
-.associate-card h3 { font: 700 1.3rem "Playfair Display", serif; margin: 0 0 .6rem; }
-.associate-card p { color: var(--ink-soft); font-size: .9rem; margin: 0; }
 
 /* ---------- location/hours ---------- */
 .info-grid { display: grid; grid-template-columns: 1fr; gap: 1.4rem; }
@@ -783,59 +776,6 @@ h2::after {
   transition: background .2s var(--ease);
 }
 .video-modal-close:hover { background: rgba(255,255,255,.3); }
-
-/* ---------- associate card "read more" trigger ---------- */
-.btn-read-more {
-  display: inline-flex; align-items: center; gap: .35rem; margin-top: 1rem;
-  background: none; border: 0; padding: 0; cursor: pointer;
-  font: 700 .74rem/1 "Montserrat", ui-sans-serif, system-ui, sans-serif; text-transform: uppercase; letter-spacing: .08em;
-  color: var(--green-dark); transition: color .2s var(--ease);
-}
-.btn-read-more svg { width: 13px; height: 13px; transform: rotate(-90deg); transition: transform .25s var(--ease); }
-.btn-read-more:hover { color: var(--gold-dark); }
-.btn-read-more:hover svg { transform: rotate(-90deg) translateX(3px); }
-
-/* ---------- doctor bio modal ---------- */
-.bio-modal { position: fixed; inset: 0; z-index: 300; display: flex; align-items: center; justify-content: center; padding: 1.5rem; }
-.bio-modal[hidden] { display: none; }
-.bio-modal-backdrop { position: absolute; inset: 0; background: rgba(8,14,20,.86); backdrop-filter: blur(3px); }
-.bio-modal-box {
-  position: relative; width: 100%; max-width: 900px; max-height: 88vh; overflow: hidden;
-  background: var(--bg-raised); border-radius: var(--radius); box-shadow: var(--shadow-lg);
-  display: grid; grid-template-columns: 1fr;
-}
-@media (min-width: 720px) { .bio-modal-box { grid-template-columns: .8fr 1.2fr; } }
-.bio-modal-photo { position: relative; min-height: 220px; background: var(--logo-navy); overflow: hidden; }
-.bio-modal-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 18%; }
-.bio-modal-photo::after {
-  content: ""; position: absolute; inset: 0; border-right: 4px solid var(--gold); pointer-events: none;
-}
-@media (max-width: 719px) { .bio-modal-photo::after { border-right: none; border-bottom: 4px solid var(--gold); } }
-.bio-modal-content { padding: clamp(1.6rem, 4vw, 2.6rem); overflow-y: auto; max-height: 88vh; }
-.bio-modal-content .title {
-  color: var(--accent-dark); font: 700 .78rem/1 "Montserrat", ui-sans-serif, system-ui, sans-serif;
-  text-transform: uppercase; letter-spacing: .1em; display: block; margin-bottom: .5rem;
-}
-.bio-modal-content h3 { font: 800 clamp(1.5rem, 3vw, 2rem)/1.15 "Playfair Display", serif; margin: 0 0 1.2rem; position: relative; padding-bottom: .9rem; }
-.bio-modal-content h3::after { content: ""; position: absolute; left: 0; bottom: 0; width: 48px; height: 3px; background: var(--gold); }
-.bio-modal-text p { color: var(--ink-soft); margin: 0 0 1rem; line-height: 1.7; font-size: .95rem; }
-.bio-modal-text p:last-child { margin-bottom: 0; }
-.bio-modal-text h4 {
-  font: 700 .8rem/1 "Montserrat", ui-sans-serif, system-ui, sans-serif; text-transform: uppercase; letter-spacing: .07em;
-  color: var(--accent-dark); margin: 1.5rem 0 .7rem; padding-top: 1.2rem; border-top: 1px solid var(--line);
-}
-.bio-modal-text ul { margin: 0; padding: 0; list-style: none; }
-.bio-modal-text li {
-  position: relative; padding-left: 1.1rem; margin-bottom: .5rem; color: var(--ink-soft); font-size: .92rem; line-height: 1.5;
-}
-.bio-modal-text li::before { content: ""; position: absolute; left: 0; top: .55em; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
-.bio-modal-text li:last-child { margin-bottom: 0; }
-.bio-modal-close {
-  position: absolute; top: 14px; right: 14px; z-index: 1; width: 38px; height: 38px; border-radius: 50%; border: 0;
-  background: rgba(8,14,20,.4); color: #fff; font-size: 1.5rem; line-height: 1; cursor: pointer;
-  transition: background .2s var(--ease), transform .2s var(--ease);
-}
-.bio-modal-close:hover { background: var(--gold-dark); transform: rotate(90deg); }
 
 /* ---------- cta band ---------- */
 .cta-band {
@@ -1346,6 +1286,24 @@ header.site.scrolled .brand-logo { height: 60px; }
   font: 600 .76rem/1 "Montserrat", ui-sans-serif, system-ui, sans-serif; padding: .5rem .85rem; border-radius: 999px;
   background: #fff; color: var(--ink-soft); border: 1px solid var(--line);
 }
+
+/* ---------- homepage team preview ---------- */
+.team-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; margin-top: 3.5rem; }
+.team-grid-card { flex: 0 0 calc(25% - 1.5rem); text-align: center; }
+@media (max-width: 900px) { .team-grid-card { flex-basis: calc(33.333% - 1.334rem); } }
+@media (max-width: 640px) { .team-grid-card { flex-basis: calc(50% - 1rem); } }
+.team-grid-card img {
+  width: 150px; height: 150px; border-radius: 50%; object-fit: cover; object-position: center top;
+  border: 4px solid var(--green); margin: 0 auto 1rem; display: block;
+  transition: border-color .3s var(--ease), transform .3s var(--ease);
+}
+.team-grid-card:hover img { border-color: var(--gold); transform: translateY(-4px); }
+.team-grid-card .title {
+  display: block; color: var(--accent-dark); font: 700 .68rem/1 "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  text-transform: uppercase; letter-spacing: .06em; margin-bottom: .35rem;
+}
+.team-grid-card h4 { font: 700 1.05rem "Playfair Display", serif; margin: 0; }
+.team-grid-cta { text-align: center; margin-top: 3rem; }
 
 @media print {
   header.site, footer.site, .page-header, .form-print-actions, .scroll-top, .nav-scrim { display: none !important; }
