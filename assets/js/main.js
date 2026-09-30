@@ -1353,3 +1353,255 @@ const EducationArticlesPage8 = (() => {
     if (event.key === 'Escape') close();
   });
 })();
+
+/**
+ * Advanced motion & polish enhancements (site-wide, loaded on every page).
+ * Every module below only touches markup that already exists, so pages
+ * without a given element simply no-op.
+ */
+
+/**
+ * Fades lazy images in once decoded instead of letting them pop in.
+ * Skips images already served from cache (img.complete on attach).
+ */
+const ImageFadeIn = (() => {
+  if (REDUCE_MOTION) return null;
+  const imgs = document.querySelectorAll('img[loading="lazy"]');
+  imgs.forEach((img) => {
+    if (img.complete) return;
+    img.classList.add('img-fade');
+    img.addEventListener('load', () => img.classList.add('img-fade-in'), { once: true });
+  });
+  return null;
+})();
+
+/**
+ * Counts stat numbers up from 0 the first time each ".stat-float-card b"
+ * scrolls into view. Parses the leading number (integer or decimal) from
+ * the element's own text and animates only that part, so "25+", "4.9★",
+ * and "6 mo+" all animate correctly without any markup changes.
+ */
+const StatCounters = (() => {
+  if (REDUCE_MOTION || !('IntersectionObserver' in window)) return null;
+  const els = document.querySelectorAll('.stat-float-card b');
+  if (!els.length) return null;
+
+  function parse(text) {
+    const match = text.match(/^(\d+(?:\.\d+)?)/);
+    if (!match) return null;
+    const decimals = (match[1].split('.')[1] || '').length;
+    return { target: parseFloat(match[1]), decimals, suffix: text.slice(match[1].length) };
+  }
+
+  function animate(el) {
+    const parsed = parse(el.textContent.trim());
+    if (!parsed) return;
+    const { target, decimals, suffix } = parsed;
+    const duration = 1100;
+    const start = performance.now();
+    function tick(now) {
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = (target * eased).toFixed(decimals) + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        animate(entry.target);
+        observer.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.4 }
+  );
+  els.forEach((el) => observer.observe(el));
+  return null;
+})();
+
+/**
+ * Gentle "magnetic" pull toward the cursor for the site's primary calls to
+ * action (hero button, appointment CTA band). Pointer devices only.
+ */
+const MagneticCTA = (() => {
+  if (REDUCE_MOTION || !window.matchMedia('(hover: hover)').matches) return null;
+  const targets = document.querySelectorAll('.btn-hero, .cta-band .btn');
+  if (!targets.length) return null;
+
+  targets.forEach((btn) => {
+    btn.addEventListener('mousemove', (event) => {
+      const rect = btn.getBoundingClientRect();
+      const x = event.clientX - rect.left - rect.width / 2;
+      const y = event.clientY - rect.top - rect.height / 2;
+      btn.style.transform = `translate(${x * 0.12}px, ${y * 0.3}px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = '';
+    });
+  });
+  return null;
+})();
+
+/**
+ * Phase 2 — advanced interaction layer: ambient cursor glow, 3D card tilt,
+ * and material-style click ripples. Desktop/pointer-fine only where it
+ * matters; every module guards on REDUCE_MOTION and no-ops without its
+ * target markup, so it is safe to load on every page.
+ */
+
+const CursorGlow = (() => {
+  if (REDUCE_MOTION || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return null;
+
+  const glow = document.createElement('div');
+  glow.id = 'cursor-glow';
+  glow.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(glow);
+
+  let targetX = window.innerWidth / 2;
+  let targetY = window.innerHeight / 2;
+  let x = targetX;
+  let y = targetY;
+  let raf = null;
+
+  function loop() {
+    x += (targetX - x) * 0.15;
+    y += (targetY - y) * 0.15;
+    glow.style.transform = `translate(${x - glow.offsetWidth / 2}px, ${y - glow.offsetHeight / 2}px)`;
+    raf = requestAnimationFrame(loop);
+  }
+
+  window.addEventListener(
+    'mousemove',
+    (event) => {
+      targetX = event.clientX;
+      targetY = event.clientY;
+      glow.classList.add('is-active');
+      if (!raf) raf = requestAnimationFrame(loop);
+      const strong = event.target.closest('a, button, .btn, .btn-outline-light, .btn-hero, .service-luxe-card, .gallery-item');
+      glow.classList.toggle('is-strong', !!strong);
+    },
+    { passive: true }
+  );
+
+  document.documentElement.addEventListener('mouseleave', () => glow.classList.remove('is-active'));
+
+  return null;
+})();
+
+const CardTilt3D = (() => {
+  if (REDUCE_MOTION || !window.matchMedia('(hover: hover)').matches) return null;
+  const cards = document.querySelectorAll('.service-luxe-card, .stat-float-card, .gallery-item, .sidebar-card, .team-grid-card');
+  if (!cards.length) return null;
+
+  cards.forEach((card) => {
+    card.addEventListener('mousemove', (event) => {
+      const rect = card.getBoundingClientRect();
+      const px = (event.clientX - rect.left) / rect.width - 0.5;
+      const py = (event.clientY - rect.top) / rect.height - 0.5;
+      card.style.transform = `perspective(900px) rotateX(${(-py * 8).toFixed(2)}deg) rotateY(${(px * 8).toFixed(2)}deg) translateY(-4px)`;
+      card.classList.add('tilt-active');
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+      card.classList.remove('tilt-active');
+    });
+  });
+  return null;
+})();
+
+const ButtonRipple = (() => {
+  if (REDUCE_MOTION) return null;
+  document.addEventListener('click', (event) => {
+    const btn = event.target.closest('.btn, .btn-outline-light, .btn-hero');
+    if (!btn) return;
+    const rect = btn.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height) * 1.4;
+    const ripple = document.createElement('span');
+    ripple.className = 'ripple';
+    ripple.style.width = ripple.style.height = `${size}px`;
+    ripple.style.left = `${event.clientX - rect.left - size / 2}px`;
+    ripple.style.top = `${event.clientY - rect.top - size / 2}px`;
+    btn.appendChild(ripple);
+    ripple.addEventListener('animationend', () => ripple.remove(), { once: true });
+  });
+  return null;
+})();
+
+/**
+ * Phase 3 — cinematic navigation & nav polish.
+ */
+
+/**
+ * Full-screen color-wash transition on internal link clicks, so moving
+ * between pages feels like one continuous app instead of separate loads.
+ * Only intercepts same-origin, same-tab, non-anchor, non-download links.
+ */
+const PageTransition = (() => {
+  if (REDUCE_MOTION) return null;
+
+  document.addEventListener('click', (event) => {
+    if (event.defaultPrevented || event.button !== 0) return;
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    const link = event.target.closest('a[href]');
+    if (!link) return;
+    if (link.closest('[data-lightbox]')) return;
+    if (link.target && link.target !== '_self') return;
+    if (link.hasAttribute('download')) return;
+
+    let url;
+    try {
+      url = new URL(link.href, window.location.href);
+    } catch (err) {
+      return;
+    }
+    if (url.origin !== window.location.origin) return;
+    if (url.pathname === window.location.pathname && url.hash) return; // same-page anchor
+    if (/^(mailto:|tel:)/i.test(link.getAttribute('href') || '')) return;
+
+    event.preventDefault();
+    const curtain = document.createElement('div');
+    curtain.className = 'page-curtain';
+    document.body.appendChild(curtain);
+    requestAnimationFrame(() => curtain.classList.add('is-active'));
+    setTimeout(() => {
+      window.location.href = link.href;
+    }, 380);
+  });
+
+  return null;
+})();
+
+/**
+ * A soft glass "pill" that glides beneath whichever top-level nav link
+ * the visitor is hovering, instead of a static underline.
+ */
+const NavLiquidPill = (() => {
+  if (REDUCE_MOTION) return null;
+  const nav = document.querySelector('nav.site');
+  if (!nav) return null;
+  const links = nav.querySelectorAll(':scope > a');
+  if (!links.length) return null;
+
+  const pill = document.createElement('span');
+  pill.className = 'nav-pill';
+  pill.setAttribute('aria-hidden', 'true');
+  nav.appendChild(pill);
+
+  function moveTo(el) {
+    const navRect = nav.getBoundingClientRect();
+    const rect = el.getBoundingClientRect();
+    pill.style.opacity = '1';
+    pill.style.width = `${rect.width}px`;
+    pill.style.transform = `translate(${rect.left - navRect.left}px, -50%)`;
+  }
+
+  links.forEach((a) => a.addEventListener('mouseenter', () => moveTo(a)));
+  nav.addEventListener('mouseleave', () => {
+    pill.style.opacity = '0';
+  });
+
+  return null;
+})();
