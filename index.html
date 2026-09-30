@@ -8,10 +8,33 @@
 <link rel="icon" href="assets/img/favicon-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,500;1,600&family=Montserrat:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,500;1,600&family=Montserrat:wght@400;500;600;700;800&family=Alex+Brush&display=swap">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="has-hero-header">
+<div class="site-atmosphere" aria-hidden="true">
+  <div class="atmo-aurora"></div>
+  <div class="atmo-grid"></div>
+  <div class="atmo-tooth atmo-tooth-1"></div>
+  <div class="atmo-tooth atmo-tooth-2"></div>
+  <div class="atmo-tooth atmo-tooth-3"></div>
+  <div class="atmo-tooth atmo-tooth-4"></div>
+  <div class="atmo-bubbles">
+    <span style="--l:4%;  --s:14px; --d:22s; --dl:0s"></span>
+    <span style="--l:12%; --s:8px;  --d:17s; --dl:2s"></span>
+    <span style="--l:20%; --s:11px; --d:25s; --dl:5s"></span>
+    <span style="--l:29%; --s:7px;  --d:19s; --dl:1s"></span>
+    <span style="--l:38%; --s:13px; --d:23s; --dl:7s"></span>
+    <span style="--l:47%; --s:9px;  --d:16s; --dl:3s"></span>
+    <span style="--l:56%; --s:12px; --d:26s; --dl:9s"></span>
+    <span style="--l:64%; --s:8px;  --d:18s; --dl:4s"></span>
+    <span style="--l:72%; --s:10px; --d:24s; --dl:6s"></span>
+    <span style="--l:81%; --s:14px; --d:20s; --dl:8s"></span>
+    <span style="--l:89%; --s:9px;  --d:21s; --dl:2.5s"></span>
+    <span style="--l:96%; --s:11px; --d:27s; --dl:10s"></span>
+  </div>
+</div>
+
 
 <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
   <defs>
@@ -49,7 +72,50 @@
       <a href="index.html" class="current">Home</a>
       <a href="staff.html">Staff</a>
       <a href="office.html">Office</a>
-      <a href="services.html">Services</a>
+      <div class="nav-more nav-services" tabindex="0">
+        <span>Services <svg viewBox="0 0 24 24"><use href="#ic-chevron"/></svg></span>
+        <div class="nav-more-menu nav-services-menu">
+          <a href="services.html">All Services</a>
+          <div class="nav-sub" tabindex="0">
+            <span class="nav-sub-toggle">General &amp; Preventive<svg class="nav-sub-caret" viewBox="0 0 24 24"><use href="#ic-chevron"/></svg></span>
+            <div class="nav-sub-menu">
+              <a href="general-dentistry.html">General Dentistry</a>
+              <a href="professional-teeth-cleanings.html">Professional Teeth Cleanings</a>
+              <a href="deep-cleanings.html">Deep Cleanings</a>
+              <a href="sealants.html">Sealants</a>
+              <a href="oral-cancer-screenings.html">Oral Cancer Screenings</a>
+              <a href="periodontal-therapy.html">Periodontal Therapy</a>
+            </div>
+          </div>
+          <div class="nav-sub" tabindex="0">
+            <span class="nav-sub-toggle">Restorative<svg class="nav-sub-caret" viewBox="0 0 24 24"><use href="#ic-chevron"/></svg></span>
+            <div class="nav-sub-menu">
+              <a href="fillings.html">Fillings</a>
+              <a href="crowns-bridgework.html">Crowns &amp; Bridgework</a>
+              <a href="root-canal-treatment.html">Root Canal Treatment</a>
+              <a href="dental-implants.html">Dental Implants</a>
+              <a href="removable-dentures.html">Removable Dentures</a>
+              <a href="tooth-extractions.html">Tooth Extractions</a>
+            </div>
+          </div>
+          <div class="nav-sub" tabindex="0">
+            <span class="nav-sub-toggle">Cosmetic<svg class="nav-sub-caret" viewBox="0 0 24 24"><use href="#ic-chevron"/></svg></span>
+            <div class="nav-sub-menu">
+              <a href="teeth-whitening.html">Teeth Whitening</a>
+              <a href="porcelain-veneers.html">Porcelain Veneers</a>
+              <a href="bonding.html">Bonding</a>
+              <a href="invisalign.html">Invisalign</a>
+            </div>
+          </div>
+          <div class="nav-sub" tabindex="0">
+            <span class="nav-sub-toggle">Specialty Care<svg class="nav-sub-caret" viewBox="0 0 24 24"><use href="#ic-chevron"/></svg></span>
+            <div class="nav-sub-menu">
+              <a href="orthodontic-treatment.html">Orthodontic Treatment</a>
+              <a href="tmj-tmd-treatment.html">TMJ/TMD Treatment</a>
+            </div>
+          </div>
+        </div>
+      </div>
       <a href="new-patients.html">New Patients</a>
       <a href="contact.html">Contact Us</a>
       <a href="appointment.html">Appointment Request</a>
@@ -118,7 +184,13 @@
         <p class="slide-eyebrow" id="slideEyebrow">Spring, TX · Family Dentistry</p>
         <h1 id="slideTitle">Care for Your Smile</h1>
         <p class="slide-sub" id="slideSub">and Let it Brighten Your Day!</p>
-        <a class="btn btn-hero hero-luxe-cta" href="appointment.html">Make an Appointment</a>
+        <div class="hero-luxe-cta-row">
+          <a class="btn btn-hero hero-luxe-cta" href="appointment.html">Make an Appointment</a>
+          <a class="btn btn-outline-light hero-luxe-phone" href="tel:2813769068">
+            <svg viewBox="0 0 24 24"><use href="#ic-phone"/></svg>
+            (281) 376-9068
+          </a>
+        </div>
       </div>
     </div>
 
@@ -130,86 +202,76 @@
     </div>
     <div class="hero-luxe-clip" aria-hidden="true"></div>
   </section>
-
   <div class="stat-float-wrap">
     <div class="wrap">
-      <div class="stat-float-grid reveal-group">
-        <div class="stat-float-card reveal" style="--r:-3deg">
-          <span class="stat-ic"><svg viewBox="0 0 24 24"><use href="#ic-clock"/></svg></span>
-          <b>25+</b><span>Years serving Spring</span>
+      <div class="stat-flat-grid reveal-group">
+        <div class="stat-flat-card reveal">
+          <span>Years Serving Spring</span>
+          <b>25+</b>
         </div>
-        <div class="stat-float-card reveal" style="--r:2deg">
-          <span class="stat-ic"><svg viewBox="0 0 24 24"><use href="#ic-star"/></svg></span>
-          <b>4.9★</b><span>Average patient rating</span>
+        <div class="stat-flat-card reveal">
+          <span>Average Patient Rating</span>
+          <b>4.9★</b>
         </div>
-        <div class="stat-float-card reveal" style="--r:-2deg">
-          <span class="stat-ic"><svg viewBox="0 0 24 24"><use href="#ic-heart"/></svg></span>
-          <b>500+</b><span>Happy families</span>
+        <div class="stat-flat-card reveal">
+          <span>Happy Families</span>
+          <b>500+</b>
         </div>
-        <div class="stat-float-card reveal" style="--r:3deg">
-          <span class="stat-ic"><svg viewBox="0 0 24 24"><use href="#logo-mark"/></svg></span>
-          <b>6 mo+</b><span>Patients welcome from</span>
+        <div class="stat-flat-card reveal">
+          <span>Patients Welcome From</span>
+          <b>6 mo+</b>
         </div>
       </div>
     </div>
   </div>
-
-  <section class="contact-bar" id="contact">
-    <div class="wrap">
-      <div class="section-head center light">
-        <h2>Contact Us</h2>
-        <p>Send Us an Email</p>
-      </div>
-      <form class="quick-form" data-quick-form action="https://formspree.io/familydentalcare@mail.com" method="POST">
-        <input type="hidden" name="_subject" value="New Website Contact Form Submission - Family Dental Care of Spring">
-        <input required placeholder="Enter your name (Required)" type="text" name="name" aria-label="Name">
-        <input required placeholder="Enter email (Required)" type="email" name="email" aria-label="Email">
-        <input required placeholder="(XXX)XXX-XXXX (Required)" type="tel" name="phone" aria-label="Phone" pattern="[0-9()\-\s]{7,}">
-        <textarea placeholder="Notes to the Doctor" name="notes" rows="1" aria-label="Notes"></textarea>
-        <button class="btn" type="submit">Submit</button>
-      </form>
-      <p class="form-status" id="formStatus" role="status"></p>
-      <p class="form-note">Please do not submit any Protected Health Information (PHI).</p>
-    </div>
-  </section>
-
-  <div class="contact-info-strip">
-    <div class="wrap">
-      <span class="cis-brand"><svg viewBox="0 0 24 24"><use href="#ic-pin"/></svg>Family Dental Care</span>
-      <span class="cis-sep">&middot;</span>
-      <span class="cis-address">16000 Stuebner Airline Rd. Suite #230, Spring, TX 77379 US</span>
-      <span class="cis-sep">&middot;</span>
-      <a class="cis-phone" href="tel:2813769068"><svg viewBox="0 0 24 24"><use href="#ic-phone"/></svg>(281) 376-9068</a>
+  <div class="highlight-ticker" aria-hidden="true">
+    <div class="highlight-ticker-track">
+      <span class="highlight-pill"><svg viewBox="0 0 24 24"><use href="#ic-heart"/></svg>25+ Years Serving Spring, TX</span>
+      <span class="highlight-pill"><svg viewBox="0 0 24 24"><use href="#ic-star"/></svg>4.9★ Average Patient Rating</span>
+      <span class="highlight-pill"><svg viewBox="0 0 24 24"><use href="#logo-mark"/></svg>Patients Welcome from 6 Months+</span>
+      <span class="highlight-pill"><svg viewBox="0 0 24 24"><use href="#ic-book"/></svg>General &amp; Preventive Care</span>
+      <span class="highlight-pill"><svg viewBox="0 0 24 24"><use href="#ic-image"/></svg>Cosmetic Dentistry</span>
+      <span class="highlight-pill"><svg viewBox="0 0 24 24"><use href="#ic-grad"/></svg>Restorative &amp; Implant Dentistry<span class="sep">·</span></span>
+      <span class="highlight-pill"><svg viewBox="0 0 24 24"><use href="#ic-heart"/></svg>25+ Years Serving Spring, TX</span>
+      <span class="highlight-pill"><svg viewBox="0 0 24 24"><use href="#ic-star"/></svg>4.9★ Average Patient Rating</span>
+      <span class="highlight-pill"><svg viewBox="0 0 24 24"><use href="#logo-mark"/></svg>Patients Welcome from 6 Months+</span>
+      <span class="highlight-pill"><svg viewBox="0 0 24 24"><use href="#ic-book"/></svg>General &amp; Preventive Care</span>
+      <span class="highlight-pill"><svg viewBox="0 0 24 24"><use href="#ic-image"/></svg>Cosmetic Dentistry</span>
+      <span class="highlight-pill"><svg viewBox="0 0 24 24"><use href="#ic-grad"/></svg>Restorative &amp; Implant Dentistry<span class="sep">·</span></span>
     </div>
   </div>
-
   <section id="welcome">
     <div class="wrap">
-      <div class="welcome-luxe">
-        <div class="welcome-luxe-visual reveal">
-          <div class="welcome-luxe-glow" aria-hidden="true"></div>
-          <figure class="polaroid">
-            <img src="assets/img/office-exterior-building.png" alt="Family Dental Care of Spring building exterior">
-            <figcaption>Family Dental Care of Spring</figcaption>
-          </figure>
-        </div>
-        <div class="welcome-luxe-copy reveal">
-          <p class="eyebrow-sm">Welcome</p>
+      <div class="specialty-intro">
+        <div class="specialty-copy reveal">
+          <span class="script-lede">Welcome</span>
           <h2>Welcome to Our Practice</h2>
+          <hr class="lede-rule">
           <h3>Welcome to Family Dental Care, Your Dentist in Spring, TX</h3>
           <p>From first contact at Family Dental Care, our Spring dentists are committed to your individual attention and strive to provide personalized oral health care tailored for your unique dental needs and goals. We work hard to create the ultimate stress-free and comfortable dental experience. Your health and comfort are our top priorities, and we do what it takes to help every patient understand their symptoms and treatment options in a relaxed office setting.</p>
           <p>It is our mission to educate and provide our patients with the best dental care in Spring. For that reason, we've designed this website to provide you with all of the important information you need to make healthy decisions about your teeth and gums. We encourage you to browse our office page, service details, and patient education library whenever you have a question about our practice or your oral health. Whether you are looking for information on general dentistry, teeth whitening, crowns, preventive care, or periodontal exams, you can learn more about all of your options from our services page.</p>
           <p>Feel free to contact our Spring office with any questions. We look forward to making each visit to our office a positive experience.</p>
+          <a class="btn btn-primary" href="office.html">Learn More About Our Office</a>
+        </div>
+        <div class="collage-grid reveal">
+          <div class="collage-item">
+            <img src="assets/img/office-exterior-building.png" alt="Family Dental Care of Spring building exterior">
+          </div>
+          <div class="collage-item">
+            <img src="assets/img/office-treatment-room.jpg" alt="Treatment room at Family Dental Care of Spring">
+          </div>
+          <div class="collage-item">
+            <img src="assets/img/office-waiting-room.jpg" alt="Waiting room at Family Dental Care of Spring">
+          </div>
         </div>
       </div>
     </div>
   </section>
-
   <section class="services-luxe" id="services">
     <div class="services-luxe-top" aria-hidden="true"></div>
     <div class="wrap" style="position:relative; z-index:1">
       <div class="section-head center">
-        <p class="eyebrow-sm">What we offer</p>
+        <span class="script-lede">What we offer</span>
         <h2>Featured Services</h2>
         <p>Click to find out more</p>
       </div>
@@ -242,26 +304,10 @@
     </div>
     <div class="services-luxe-bottom" aria-hidden="true"></div>
   </section>
-
-  <section class="testi-luxe">
-    <div class="wrap">
-      <div class="section-head center">
-        <p class="eyebrow-sm">In their words</p>
-        <h2>What Our Patients Say</h2>
-      </div>
-      <div class="testimonial-marquee testi-bubble-marquee" id="testimonialMarquee">
-        <div class="testimonial-grid testi-bubble-grid" id="testimonialGrid"></div>
-      </div>
-      <div class="testi-luxe-cta">
-        <a class="btn btn-ghost" href="testimonials.html">See All Reviews</a>
-      </div>
-    </div>
-  </section>
-
   <section id="staff">
     <div class="wrap">
       <div class="section-head center">
-        <p class="eyebrow-sm">Meet the doctor</p>
+        <span class="script-lede">Meet the doctor</span>
         <h2>Meet Our Staff</h2>
         <p>Learn Who We Are</p>
       </div>
@@ -331,11 +377,51 @@
       </div>
     </div>
   </section>
-
+  <section class="testi-luxe">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="script-lede">In their words</span>
+        <h2>What Our Patients Say</h2>
+      </div>
+      <div class="testimonial-marquee testi-bubble-marquee" id="testimonialMarquee">
+        <div class="testimonial-grid testi-bubble-grid" id="testimonialGrid"></div>
+      </div>
+      <div class="testi-luxe-cta">
+        <a class="btn btn-ghost" href="testimonials.html">See All Reviews</a>
+      </div>
+    </div>
+  </section>
+  <section class="contact-bar" id="contact">
+    <div class="wrap">
+      <div class="section-head center light">
+        <h2>Contact Us</h2>
+        <p>Send Us an Email</p>
+      </div>
+      <form class="quick-form" data-quick-form action="https://formspree.io/familydentalcare@mail.com" method="POST">
+        <input type="hidden" name="_subject" value="New Website Contact Form Submission - Family Dental Care of Spring">
+        <input required placeholder="Enter your name (Required)" type="text" name="name" aria-label="Name">
+        <input required placeholder="Enter email (Required)" type="email" name="email" aria-label="Email">
+        <input required placeholder="(XXX)XXX-XXXX (Required)" type="tel" name="phone" aria-label="Phone" pattern="[0-9()\-\s]{7,}">
+        <textarea placeholder="Notes to the Doctor" name="notes" rows="1" aria-label="Notes"></textarea>
+        <button class="btn" type="submit">Submit</button>
+      </form>
+      <p class="form-status" id="formStatus" role="status"></p>
+      <p class="form-note">Please do not submit any Protected Health Information (PHI).</p>
+    </div>
+  </section>
+  <div class="contact-info-strip">
+    <div class="wrap">
+      <span class="cis-brand"><svg viewBox="0 0 24 24"><use href="#ic-pin"/></svg>Family Dental Care</span>
+      <span class="cis-sep">&middot;</span>
+      <span class="cis-address">16000 Stuebner Airline Rd. Suite #230, Spring, TX 77379 US</span>
+      <span class="cis-sep">&middot;</span>
+      <a class="cis-phone" href="tel:2813769068"><svg viewBox="0 0 24 24"><use href="#ic-phone"/></svg>(281) 376-9068</a>
+    </div>
+  </div>
   <section id="location" style="background:var(--bg-sunken)">
     <div class="wrap">
       <div class="section-head center">
-        <p class="eyebrow-sm">Visit us</p>
+        <span class="script-lede">Visit Us</span>
         <h2>Our Location &amp; Hours</h2>
         <p>Conveniently located on Stuebner Airline Rd. in Spring, TX.</p>
       </div>
@@ -359,11 +445,51 @@
       </div>
     </div>
   </section>
-
-  <section class="cta-band reveal" id="appointment">
-    <h2>Ready to brighten your smile?</h2>
-    <p>Request an appointment online and our team will confirm a time that works for you and your family.</p>
-    <a class="btn btn-primary btn-lg" href="tel:2813769068">Request Appointment</a>
+  <section id="results">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="script-lede">Real results</span>
+        <h2>Patient Before &amp; After</h2>
+        <p>Actual Family Dental Care of Spring patients, shared with their permission.</p>
+      </div>
+      <div class="before-after-grid reveal-group">
+        <a class="before-after-card reveal" href="gallery.html">
+          <img loading="lazy" src="assets/img/before-after-1-clean.png" alt="Real patient before and after dental treatment photo 1">
+          <span class="before-after-tag">Before &amp; After</span>
+        </a>
+        <a class="before-after-card reveal" href="gallery.html">
+          <img loading="lazy" src="assets/img/before-after-2.png" alt="Real patient before and after dental treatment photo 2">
+          <span class="before-after-tag">Before &amp; After</span>
+        </a>
+        <a class="before-after-card is-composite reveal" href="gallery.html">
+          <img loading="lazy" src="assets/img/before-after-3.png" alt="Real patient before and after dental treatment photo 3">
+          <span class="before-after-tag">Before &amp; After</span>
+        </a>
+      </div>
+      <div class="team-grid-cta">
+        <a class="btn btn-ghost" href="gallery.html">See the Full Smile Gallery</a>
+      </div>
+    </div>
+  </section>
+  <section id="appointment">
+    <div class="wrap">
+      <div class="cta-float-wrap reveal">
+        <div class="cta-float-bg" aria-hidden="true">
+          <img src="assets/img/office-waiting-room.jpg" alt="">
+        </div>
+        <div class="cta-float-card">
+          <div>
+            <span class="script-lede">Ready</span>
+            <h2>to brighten your smile?</h2>
+            <p>Request an appointment online and our team will confirm a time that works for you and your family.</p>
+            <a class="btn btn-primary btn-lg" href="tel:2813769068">Request Appointment</a>
+          </div>
+          <div class="cta-float-photo">
+            <img src="assets/img/office-exterior-building.png" alt="Family Dental Care of Spring building exterior">
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 </main>
 
