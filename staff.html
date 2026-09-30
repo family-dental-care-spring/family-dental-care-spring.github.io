@@ -8,10 +8,33 @@
 <link rel="icon" href="assets/img/favicon-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,500;1,600&family=Montserrat:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,500;1,600&family=Montserrat:wght@400;500;600;700;800&family=Alex+Brush&display=swap">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+<div class="site-atmosphere" aria-hidden="true">
+  <div class="atmo-aurora"></div>
+  <div class="atmo-grid"></div>
+  <div class="atmo-tooth atmo-tooth-1"></div>
+  <div class="atmo-tooth atmo-tooth-2"></div>
+  <div class="atmo-tooth atmo-tooth-3"></div>
+  <div class="atmo-tooth atmo-tooth-4"></div>
+  <div class="atmo-bubbles">
+    <span style="--l:4%;  --s:14px; --d:22s; --dl:0s"></span>
+    <span style="--l:12%; --s:8px;  --d:17s; --dl:2s"></span>
+    <span style="--l:20%; --s:11px; --d:25s; --dl:5s"></span>
+    <span style="--l:29%; --s:7px;  --d:19s; --dl:1s"></span>
+    <span style="--l:38%; --s:13px; --d:23s; --dl:7s"></span>
+    <span style="--l:47%; --s:9px;  --d:16s; --dl:3s"></span>
+    <span style="--l:56%; --s:12px; --d:26s; --dl:9s"></span>
+    <span style="--l:64%; --s:8px;  --d:18s; --dl:4s"></span>
+    <span style="--l:72%; --s:10px; --d:24s; --dl:6s"></span>
+    <span style="--l:81%; --s:14px; --d:20s; --dl:8s"></span>
+    <span style="--l:89%; --s:9px;  --d:21s; --dl:2.5s"></span>
+    <span style="--l:96%; --s:11px; --d:27s; --dl:10s"></span>
+  </div>
+</div>
+
 
 <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
   <defs>
@@ -48,7 +71,50 @@
       <a href="index.html">Home</a>
       <a href="staff.html" class="current">Staff</a>
       <a href="office.html">Office</a>
-      <a href="services.html">Services</a>
+      <div class="nav-more nav-services" tabindex="0">
+        <span>Services <svg viewBox="0 0 24 24"><use href="#ic-chevron"/></svg></span>
+        <div class="nav-more-menu nav-services-menu">
+          <a href="services.html">All Services</a>
+          <div class="nav-sub" tabindex="0">
+            <span class="nav-sub-toggle">General &amp; Preventive<svg class="nav-sub-caret" viewBox="0 0 24 24"><use href="#ic-chevron"/></svg></span>
+            <div class="nav-sub-menu">
+              <a href="general-dentistry.html">General Dentistry</a>
+              <a href="professional-teeth-cleanings.html">Professional Teeth Cleanings</a>
+              <a href="deep-cleanings.html">Deep Cleanings</a>
+              <a href="sealants.html">Sealants</a>
+              <a href="oral-cancer-screenings.html">Oral Cancer Screenings</a>
+              <a href="periodontal-therapy.html">Periodontal Therapy</a>
+            </div>
+          </div>
+          <div class="nav-sub" tabindex="0">
+            <span class="nav-sub-toggle">Restorative<svg class="nav-sub-caret" viewBox="0 0 24 24"><use href="#ic-chevron"/></svg></span>
+            <div class="nav-sub-menu">
+              <a href="fillings.html">Fillings</a>
+              <a href="crowns-bridgework.html">Crowns &amp; Bridgework</a>
+              <a href="root-canal-treatment.html">Root Canal Treatment</a>
+              <a href="dental-implants.html">Dental Implants</a>
+              <a href="removable-dentures.html">Removable Dentures</a>
+              <a href="tooth-extractions.html">Tooth Extractions</a>
+            </div>
+          </div>
+          <div class="nav-sub" tabindex="0">
+            <span class="nav-sub-toggle">Cosmetic<svg class="nav-sub-caret" viewBox="0 0 24 24"><use href="#ic-chevron"/></svg></span>
+            <div class="nav-sub-menu">
+              <a href="teeth-whitening.html">Teeth Whitening</a>
+              <a href="porcelain-veneers.html">Porcelain Veneers</a>
+              <a href="bonding.html">Bonding</a>
+              <a href="invisalign.html">Invisalign</a>
+            </div>
+          </div>
+          <div class="nav-sub" tabindex="0">
+            <span class="nav-sub-toggle">Specialty Care<svg class="nav-sub-caret" viewBox="0 0 24 24"><use href="#ic-chevron"/></svg></span>
+            <div class="nav-sub-menu">
+              <a href="orthodontic-treatment.html">Orthodontic Treatment</a>
+              <a href="tmj-tmd-treatment.html">TMJ/TMD Treatment</a>
+            </div>
+          </div>
+        </div>
+      </div>
       <a href="new-patients.html">New Patients</a>
       <a href="contact.html">Contact Us</a>
       <a href="appointment.html">Appointment Request</a>
@@ -102,6 +168,23 @@
     </div>
   </div>
 
+  <div class="highlight-ticker" aria-hidden="true">
+    <div class="highlight-ticker-track">
+      <span class="highlight-pill"><svg viewBox="0 0 24 24"><use href="#ic-heart"/></svg>25+ Years Serving Spring, TX</span>
+      <span class="highlight-pill"><svg viewBox="0 0 24 24"><use href="#ic-star"/></svg>4.9★ Average Patient Rating</span>
+      <span class="highlight-pill"><svg viewBox="0 0 24 24"><use href="#logo-mark"/></svg>Patients Welcome from 6 Months+</span>
+      <span class="highlight-pill"><svg viewBox="0 0 24 24"><use href="#ic-book"/></svg>General &amp; Preventive Care</span>
+      <span class="highlight-pill"><svg viewBox="0 0 24 24"><use href="#ic-image"/></svg>Cosmetic Dentistry</span>
+      <span class="highlight-pill"><svg viewBox="0 0 24 24"><use href="#ic-grad"/></svg>Restorative &amp; Implant Dentistry<span class="sep">·</span></span>
+      <span class="highlight-pill"><svg viewBox="0 0 24 24"><use href="#ic-heart"/></svg>25+ Years Serving Spring, TX</span>
+      <span class="highlight-pill"><svg viewBox="0 0 24 24"><use href="#ic-star"/></svg>4.9★ Average Patient Rating</span>
+      <span class="highlight-pill"><svg viewBox="0 0 24 24"><use href="#logo-mark"/></svg>Patients Welcome from 6 Months+</span>
+      <span class="highlight-pill"><svg viewBox="0 0 24 24"><use href="#ic-book"/></svg>General &amp; Preventive Care</span>
+      <span class="highlight-pill"><svg viewBox="0 0 24 24"><use href="#ic-image"/></svg>Cosmetic Dentistry</span>
+      <span class="highlight-pill"><svg viewBox="0 0 24 24"><use href="#ic-grad"/></svg>Restorative &amp; Implant Dentistry<span class="sep">·</span></span>
+    </div>
+  </div>
+
   <section id="doctor">
     <div class="wrap">
       <div class="staff-panel reveal">
@@ -131,7 +214,7 @@
   <section>
     <div class="wrap">
       <div class="section-head center">
-        <p class="eyebrow-sm">Meet the team</p>
+        <span class="script-lede">Meet the team</span>
         <h2>Our Associate Dentists</h2>
         <p>Skilled, compassionate dentists who share our commitment to gentle, personalized care.</p>
       </div>
@@ -209,6 +292,21 @@
           <span class="title">Dental Assistant</span>
           <h3 class="name">Caroline Cruz</h3>
           <p>Supports every appointment behind the scenes to keep your visit smooth and comfortable.</p>
+          <p>Caroline preps each treatment room, assists chairside during exams and procedures, and makes sure instruments and equipment are sterilized and ready between patients. She's often the calm, reassuring presence patients notice most during a procedure — checking in, explaining what's happening, and helping nervous patients feel at ease.</p>
+          <span class="staff-list-title">A typical visit with Caroline</span>
+          <ul class="staff-list">
+            <li>Sets up and sterilizes the treatment room before you're seated</li>
+            <li>Walks you through what to expect before the doctor comes in</li>
+            <li>Assists chairside during cleanings, fillings, and exams</li>
+            <li>Answers quick questions about aftercare on your way out</li>
+          </ul>
+          <p>Outside the office, Caroline is known around the practice for putting even the most nervous patients at ease with a friendly conversation — she says it's her favorite part of the job.</p>
+          <div class="staff-credentials">
+            <span class="pill">Chairside Assisting</span>
+            <span class="pill">Sterilization &amp; Safety</span>
+            <span class="pill">Patient Comfort</span>
+            <span class="pill">Treatment Room Prep</span>
+          </div>
         </div>
       </div>
 
@@ -220,6 +318,21 @@
           <span class="title">Lead Dental Assistant</span>
           <h3 class="name">Janet Venegas</h3>
           <p>Leads our chairside team, making sure every patient feels cared for from start to finish.</p>
+          <p>Janet coordinates the flow of the clinical side of the practice, from keeping the doctors on schedule to mentoring newer assistants on technique and patient care. She works closely with every dentist in the office, which means she's usually the team member who knows a returning patient's history and preferences best.</p>
+          <span class="staff-list-title">What Janet oversees</span>
+          <ul class="staff-list">
+            <li>Coordinates the daily schedule across all of our dentists</li>
+            <li>Trains and mentors new dental assistants joining the team</li>
+            <li>Keeps track of returning patients' history and preferences</li>
+            <li>Steps in chairside for more involved procedures</li>
+          </ul>
+          <p>With years of chairside experience, Janet is often the person newer team members turn to with questions — she takes real pride in helping the whole clinical team run like clockwork.</p>
+          <div class="staff-credentials">
+            <span class="pill">Team Leadership</span>
+            <span class="pill">Chairside Assisting</span>
+            <span class="pill">Patient Care Coordination</span>
+            <span class="pill">Staff Training</span>
+          </div>
         </div>
       </div>
 
@@ -231,6 +344,21 @@
           <span class="title">Head Receptionist</span>
           <h3 class="name">Cynthia Murillo</h3>
           <p>Usually the first friendly face you'll see, keeping scheduling and check-in easy and welcoming.</p>
+          <p>Cynthia manages the front desk, coordinates appointment scheduling, and helps patients understand their insurance benefits and payment options before treatment begins. If you've called our office with a question about billing or booking a visit, there's a good chance you've already spoken with her.</p>
+          <span class="staff-list-title">How Cynthia can help you</span>
+          <ul class="staff-list">
+            <li>Books and reschedules appointments around your availability</li>
+            <li>Explains your insurance coverage and estimated costs upfront</li>
+            <li>Greets and checks you in the moment you walk through the door</li>
+            <li>Sends appointment reminders so you never miss a visit</li>
+          </ul>
+          <p>Cynthia believes a great dental visit starts before you ever sit in the chair — she works hard to make scheduling and paperwork one less thing to worry about.</p>
+          <div class="staff-credentials">
+            <span class="pill">Scheduling</span>
+            <span class="pill">Insurance Coordination</span>
+            <span class="pill">Patient Check-In</span>
+            <span class="pill">Front Desk Operations</span>
+          </div>
         </div>
       </div>
 
@@ -242,6 +370,21 @@
           <span class="title">Office Manager</span>
           <h3 class="name">Mireya &ldquo;Maggie&rdquo; Rivera</h3>
           <p>Keeps the practice running smoothly so our team can focus on taking great care of you.</p>
+          <p>Maggie oversees the day-to-day operations of the office — from staffing and supplies to making sure the schedule runs on time — so that every patient visit feels organized and unhurried. She works directly with Dr. Doshi and the clinical team to keep the practice running at the standard our patients expect.</p>
+          <span class="staff-list-title">What Maggie manages</span>
+          <ul class="staff-list">
+            <li>Oversees daily staffing and office operations</li>
+            <li>Works directly with Dr. Doshi on practice standards and policy</li>
+            <li>Handles supply ordering and vendor relationships</li>
+            <li>Resolves any scheduling or billing issues that come up</li>
+          </ul>
+          <p>Maggie has been with the practice long enough to know every process inside and out, and she's usually the person who makes sure small issues never turn into a bad visit for our patients.</p>
+          <div class="staff-credentials">
+            <span class="pill">Practice Operations</span>
+            <span class="pill">Team Leadership</span>
+            <span class="pill">Patient Experience</span>
+            <span class="pill">Vendor &amp; Supply Management</span>
+          </div>
         </div>
       </div>
     </div>
@@ -250,7 +393,7 @@
   <section style="background:var(--bg-sunken)">
     <div class="wrap">
       <div class="section-head center">
-        <p class="eyebrow-sm">Why patients trust us</p>
+        <span class="script-lede">Why patients trust us</span>
         <h2>An accredited, caring team</h2>
         <p>Every team member is held to the same standard: continuing education, genuine warmth, and a stress-free visit for every patient.</p>
       </div>
@@ -277,7 +420,7 @@
   <section id="team-life">
     <div class="wrap">
       <div class="section-head center">
-        <p class="eyebrow-sm">Behind the scenes</p>
+        <span class="script-lede">Behind the scenes</span>
         <h2>Life at Family Dental Care</h2>
         <p>Birthdays, holidays, and the everyday moments that make this office feel like family.</p>
       </div>
@@ -319,7 +462,7 @@
   <section id="follow-us" style="background:var(--bg-sunken)">
     <div class="wrap">
       <div class="section-head center">
-        <p class="eyebrow-sm">Follow along</p>
+        <span class="script-lede">Follow along</span>
         <h2>A Day in the Practice</h2>
         <p>A few real moments from our office, straight from our social media — tap to watch.</p>
       </div>

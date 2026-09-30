@@ -213,6 +213,11 @@ const QuickContactForm = (() => {
     () => {
       scrollTopBtn?.classList.toggle('show', window.scrollY > 500);
       header?.classList.toggle('scrolled', window.scrollY > 50);
+      if (scrollTopBtn) {
+        const max = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+        scrollTopBtn.style.setProperty('--p', pct.toFixed(1));
+      }
     },
     { passive: true }
   );
@@ -1376,14 +1381,14 @@ const ImageFadeIn = (() => {
 })();
 
 /**
- * Counts stat numbers up from 0 the first time each ".stat-float-card b"
+ * Counts stat numbers up from 0 the first time each ".stat-flat-card b"
  * scrolls into view. Parses the leading number (integer or decimal) from
  * the element's own text and animates only that part, so "25+", "4.9★",
  * and "6 mo+" all animate correctly without any markup changes.
  */
 const StatCounters = (() => {
   if (REDUCE_MOTION || !('IntersectionObserver' in window)) return null;
-  const els = document.querySelectorAll('.stat-float-card b');
+  const els = document.querySelectorAll('.stat-flat-card b');
   if (!els.length) return null;
 
   function parse(text) {
@@ -1493,7 +1498,7 @@ const CursorGlow = (() => {
 
 const CardTilt3D = (() => {
   if (REDUCE_MOTION || !window.matchMedia('(hover: hover)').matches) return null;
-  const cards = document.querySelectorAll('.service-luxe-card, .stat-float-card, .gallery-item, .sidebar-card, .team-grid-card');
+  const cards = document.querySelectorAll('.service-luxe-card, .stat-flat-card, .gallery-item, .sidebar-card, .team-grid-card');
   if (!cards.length) return null;
 
   cards.forEach((card) => {
@@ -1535,9 +1540,9 @@ const ButtonRipple = (() => {
  */
 
 /**
- * Full-screen color-wash transition on internal link clicks, so moving
- * between pages feels like one continuous app instead of separate loads.
- * Only intercepts same-origin, same-tab, non-anchor, non-download links.
+ * Quick cross-fade on internal link clicks, so moving between pages feels
+ * a little smoother than a hard reload. Only intercepts same-origin,
+ * same-tab, non-anchor, non-download links.
  */
 const PageTransition = (() => {
   if (REDUCE_MOTION) return null;
@@ -1562,13 +1567,10 @@ const PageTransition = (() => {
     if (/^(mailto:|tel:)/i.test(link.getAttribute('href') || '')) return;
 
     event.preventDefault();
-    const curtain = document.createElement('div');
-    curtain.className = 'page-curtain';
-    document.body.appendChild(curtain);
-    requestAnimationFrame(() => curtain.classList.add('is-active'));
+    document.body.classList.add('is-leaving');
     setTimeout(() => {
       window.location.href = link.href;
-    }, 380);
+    }, 180);
   });
 
   return null;
@@ -1605,3 +1607,4 @@ const NavLiquidPill = (() => {
 
   return null;
 })();
+

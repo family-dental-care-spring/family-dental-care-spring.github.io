@@ -8,10 +8,33 @@
 <link rel="icon" href="assets/img/favicon-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,500;1,600&family=Montserrat:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,500;1,600&family=Montserrat:wght@400;500;600;700;800&family=Alex+Brush&display=swap">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+<div class="site-atmosphere" aria-hidden="true">
+  <div class="atmo-aurora"></div>
+  <div class="atmo-grid"></div>
+  <div class="atmo-tooth atmo-tooth-1"></div>
+  <div class="atmo-tooth atmo-tooth-2"></div>
+  <div class="atmo-tooth atmo-tooth-3"></div>
+  <div class="atmo-tooth atmo-tooth-4"></div>
+  <div class="atmo-bubbles">
+    <span style="--l:4%;  --s:14px; --d:22s; --dl:0s"></span>
+    <span style="--l:12%; --s:8px;  --d:17s; --dl:2s"></span>
+    <span style="--l:20%; --s:11px; --d:25s; --dl:5s"></span>
+    <span style="--l:29%; --s:7px;  --d:19s; --dl:1s"></span>
+    <span style="--l:38%; --s:13px; --d:23s; --dl:7s"></span>
+    <span style="--l:47%; --s:9px;  --d:16s; --dl:3s"></span>
+    <span style="--l:56%; --s:12px; --d:26s; --dl:9s"></span>
+    <span style="--l:64%; --s:8px;  --d:18s; --dl:4s"></span>
+    <span style="--l:72%; --s:10px; --d:24s; --dl:6s"></span>
+    <span style="--l:81%; --s:14px; --d:20s; --dl:8s"></span>
+    <span style="--l:89%; --s:9px;  --d:21s; --dl:2.5s"></span>
+    <span style="--l:96%; --s:11px; --d:27s; --dl:10s"></span>
+  </div>
+</div>
+
 
 <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
   <defs>
@@ -58,7 +81,50 @@
       <a href="index.html">Home</a>
       <a href="staff.html">Staff</a>
       <a href="office.html">Office</a>
-      <a href="services.html">Services</a>
+      <div class="nav-more nav-services" tabindex="0">
+        <span>Services <svg viewBox="0 0 24 24"><use href="#ic-chevron"/></svg></span>
+        <div class="nav-more-menu nav-services-menu">
+          <a href="services.html">All Services</a>
+          <div class="nav-sub" tabindex="0">
+            <span class="nav-sub-toggle">General &amp; Preventive<svg class="nav-sub-caret" viewBox="0 0 24 24"><use href="#ic-chevron"/></svg></span>
+            <div class="nav-sub-menu">
+              <a href="general-dentistry.html">General Dentistry</a>
+              <a href="professional-teeth-cleanings.html">Professional Teeth Cleanings</a>
+              <a href="deep-cleanings.html">Deep Cleanings</a>
+              <a href="sealants.html">Sealants</a>
+              <a href="oral-cancer-screenings.html">Oral Cancer Screenings</a>
+              <a href="periodontal-therapy.html">Periodontal Therapy</a>
+            </div>
+          </div>
+          <div class="nav-sub" tabindex="0">
+            <span class="nav-sub-toggle">Restorative<svg class="nav-sub-caret" viewBox="0 0 24 24"><use href="#ic-chevron"/></svg></span>
+            <div class="nav-sub-menu">
+              <a href="fillings.html">Fillings</a>
+              <a href="crowns-bridgework.html">Crowns &amp; Bridgework</a>
+              <a href="root-canal-treatment.html">Root Canal Treatment</a>
+              <a href="dental-implants.html">Dental Implants</a>
+              <a href="removable-dentures.html">Removable Dentures</a>
+              <a href="tooth-extractions.html">Tooth Extractions</a>
+            </div>
+          </div>
+          <div class="nav-sub" tabindex="0">
+            <span class="nav-sub-toggle">Cosmetic<svg class="nav-sub-caret" viewBox="0 0 24 24"><use href="#ic-chevron"/></svg></span>
+            <div class="nav-sub-menu">
+              <a href="teeth-whitening.html">Teeth Whitening</a>
+              <a href="porcelain-veneers.html">Porcelain Veneers</a>
+              <a href="bonding.html">Bonding</a>
+              <a href="invisalign.html">Invisalign</a>
+            </div>
+          </div>
+          <div class="nav-sub" tabindex="0">
+            <span class="nav-sub-toggle">Specialty Care<svg class="nav-sub-caret" viewBox="0 0 24 24"><use href="#ic-chevron"/></svg></span>
+            <div class="nav-sub-menu">
+              <a href="orthodontic-treatment.html">Orthodontic Treatment</a>
+              <a href="tmj-tmd-treatment.html">TMJ/TMD Treatment</a>
+            </div>
+          </div>
+        </div>
+      </div>
       <a href="new-patients.html">New Patients</a>
       <a href="contact.html">Contact Us</a>
       <a href="appointment.html">Appointment Request</a>
@@ -109,6 +175,23 @@
       <p class="eyebrow-sm">Learn more</p>
       <h1>Patient Education</h1>
       <p class="lede">We believe an informed patient is a confident patient. Browse the topics below to learn more about the treatments and habits that keep your smile healthy — and feel free to ask us anything at your next visit.</p>
+    </div>
+  </div>
+
+  <div class="highlight-ticker" aria-hidden="true">
+    <div class="highlight-ticker-track">
+      <span class="highlight-pill"><svg viewBox="0 0 24 24"><use href="#ic-heart"/></svg>25+ Years Serving Spring, TX</span>
+      <span class="highlight-pill"><svg viewBox="0 0 24 24"><use href="#ic-star"/></svg>4.9★ Average Patient Rating</span>
+      <span class="highlight-pill"><svg viewBox="0 0 24 24"><use href="#logo-mark"/></svg>Patients Welcome from 6 Months+</span>
+      <span class="highlight-pill"><svg viewBox="0 0 24 24"><use href="#ic-book"/></svg>General &amp; Preventive Care</span>
+      <span class="highlight-pill"><svg viewBox="0 0 24 24"><use href="#ic-image"/></svg>Cosmetic Dentistry</span>
+      <span class="highlight-pill"><svg viewBox="0 0 24 24"><use href="#ic-grad"/></svg>Restorative &amp; Implant Dentistry<span class="sep">·</span></span>
+      <span class="highlight-pill"><svg viewBox="0 0 24 24"><use href="#ic-heart"/></svg>25+ Years Serving Spring, TX</span>
+      <span class="highlight-pill"><svg viewBox="0 0 24 24"><use href="#ic-star"/></svg>4.9★ Average Patient Rating</span>
+      <span class="highlight-pill"><svg viewBox="0 0 24 24"><use href="#logo-mark"/></svg>Patients Welcome from 6 Months+</span>
+      <span class="highlight-pill"><svg viewBox="0 0 24 24"><use href="#ic-book"/></svg>General &amp; Preventive Care</span>
+      <span class="highlight-pill"><svg viewBox="0 0 24 24"><use href="#ic-image"/></svg>Cosmetic Dentistry</span>
+      <span class="highlight-pill"><svg viewBox="0 0 24 24"><use href="#ic-grad"/></svg>Restorative &amp; Implant Dentistry<span class="sep">·</span></span>
     </div>
   </div>
 
