@@ -302,18 +302,21 @@ header.site .btn-ghost:hover { border-color: var(--green); color: var(--green); 
 /* ---------- contact bar ---------- */
 .contact-info-strip { background: var(--bg-sunken); border-bottom: 1px solid var(--line); padding: .9rem 0; }
 .contact-info-strip .wrap {
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .5rem 1.4rem;
-  font-size: .85rem; color: var(--ink-soft);
+  display: flex; flex-wrap: nowrap; align-items: center; justify-content: center; gap: .5rem 1rem;
+  font-size: .85rem; color: var(--ink-soft); white-space: nowrap; overflow: hidden;
 }
 .contact-info-strip svg { width: 15px; height: 15px; flex: none; }
-.contact-info-strip .cis-brand, .contact-info-strip .cis-address, .contact-info-strip .cis-phone {
+.contact-info-strip .cis-brand, .contact-info-strip .cis-address, .contact-info-strip .cis-phone, .contact-info-strip .cis-fax {
   display: inline-flex; align-items: center; gap: .4rem;
 }
 .contact-info-strip .cis-brand { font-weight: 700; color: var(--ink); }
 .contact-info-strip .cis-sep { opacity: .4; }
 .contact-info-strip .cis-phone { color: var(--green-dark); font-weight: 700; text-decoration: none; transition: color .2s var(--ease); }
 .contact-info-strip .cis-phone:hover { color: var(--gold-dark); }
-@media (max-width: 640px) { .contact-info-strip .cis-address { display: none; } }
+@media (max-width: 1240px) { .contact-info-strip .wrap { font-size: .78rem; gap: .4rem .7rem; } }
+@media (max-width: 1060px) { .contact-info-strip .cis-address { display: none; } }
+@media (max-width: 860px)  { .contact-info-strip .wrap { font-size: .72rem; gap: .35rem .5rem; } }
+@media (max-width: 700px)  { .contact-info-strip .wrap { flex-wrap: wrap; white-space: normal; overflow: visible; } }
 
 .contact-bar {
   position: relative; color: #fff; padding: 4rem 0;
