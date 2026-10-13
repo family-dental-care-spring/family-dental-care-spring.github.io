@@ -9,71 +9,10 @@
 const REDUCE_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /**
- * Hero slider (home page only): rotates headline/subhead text on an interval
- * and via prev/next/dot controls. No-ops if the slider markup isn't present.
+ * Hero (home page): previously cycled through several taglines on a timer;
+ * now a static headline per the client's request, so there is no slider
+ * module here anymore.
  */
-const HeroSlider = (() => {
-  const SLIDES = [
-    { eyebrow: 'Spring, TX · Family Dentistry', title: 'Care for Your Smile', sub: 'and Let it Brighten Your Day!' },
-    { eyebrow: 'Spring, TX · Family Dentistry', title: 'Healthy Mouth', sub: 'Happy Life' },
-    { eyebrow: 'Spring, TX · Family Dentistry', title: 'Changing Lives', sub: 'One Smile at a Time' },
-    { eyebrow: 'Spring, TX · Family Dentistry', title: 'Discover Your Smile', sub: 'Today!' },
-  ];
-  const TRANSITION_MS = 180;
-  const AUTOPLAY_MS = 6000;
-
-  const els = {
-    title: document.getElementById('slideTitle'),
-    sub: document.getElementById('slideSub'),
-    eyebrow: document.getElementById('slideEyebrow'),
-    dots: document.querySelectorAll('[data-slide-dot]'),
-    prev: document.querySelector('[data-slide-prev]'),
-    next: document.querySelector('[data-slide-next]'),
-  };
-
-  if (!els.title || !els.sub || !els.eyebrow) return null; // no slider on this page
-
-  let index = 0;
-  let timer = null;
-
-  function render() {
-    const slide = SLIDES[index];
-    els.title.style.opacity = 0;
-    els.sub.style.opacity = 0;
-    setTimeout(() => {
-      els.title.textContent = slide.title;
-      els.sub.textContent = slide.sub;
-      els.eyebrow.textContent = slide.eyebrow;
-      els.title.style.opacity = 1;
-      els.sub.style.opacity = 1;
-    }, TRANSITION_MS);
-    els.dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
-  }
-
-  function goTo(i) {
-    index = ((i % SLIDES.length) + SLIDES.length) % SLIDES.length;
-    render();
-    restartAutoplay();
-  }
-
-  function step(delta) {
-    goTo(index + delta);
-  }
-
-  function restartAutoplay() {
-    if (REDUCE_MOTION) return;
-    clearInterval(timer);
-    timer = setInterval(() => step(1), AUTOPLAY_MS);
-  }
-
-  els.prev?.addEventListener('click', () => step(-1));
-  els.next?.addEventListener('click', () => step(1));
-  els.dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
-
-  restartAutoplay();
-
-  return { goTo, step };
-})();
 
 const ScrollProgress = (() => {
   if (REDUCE_MOTION) return null;
