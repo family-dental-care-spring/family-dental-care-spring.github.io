@@ -1,0 +1,40 @@
+name = "family-dental-booking"
+main = "index.js"
+compatibility_date = "2024-11-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "family-dental-bookings"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"   # from: npx wrangler d1 create family-dental-bookings
+
+[triggers]
+crons = ["* * * * *"]
+
+[vars]
+# Every origin allowed to call this API. No trailing slash. Must match exactly
+# (https vs http, www vs no-www all count as different origins).
+ALLOWED_ORIGINS = 'https://family-dental-care-spring.github.io,http://localhost:3000,http://localhost:8000'
+
+# This worker's own deployed address — fill in after first `wrangler deploy`,
+# then deploy again. Used to build the /cancel link in emails.
+PUBLIC_URL = 'https://family-dental-booking.REPLACE.workers.dev'
+
+# Google Apps Script Web App URL (see gmail-relay.gs + README.md).
+MAIL_RELAY_URL = 'https://script.google.com/macros/s/REPLACE_WITH_DEPLOYMENT_ID/exec'
+
+# Business inboxes.
+HOSPITAL_EMAIL = 'familydentalcare2@mail.com'
+ENQUIRY_EMAIL = 'familydentalcare2@mail.com'
+
+# Doctor directory. Replace with each doctor's real email once known —
+# everything currently points at the shared practice inbox as a placeholder.
+DOCTORS_JSON = '{"doshi":{"name":"Dr. Jay Doshi","nameHi":"डॉ. जय दोशी","email":"familydentalcare2@mail.com"},"pham":{"name":"Dr. Brandon Pham","nameHi":"डॉ. ब्रैंडन फाम","email":"familydentalcare2@mail.com"},"nguyen":{"name":"Dr. Mai Nguyen","nameHi":"डॉ. माई गुयेन","email":"familydentalcare2@mail.com"},"khadija":{"name":"Dr. Duha Abou Khadija","nameHi":"डॉ. दुहा अबू खदीजा","email":"familydentalcare2@mail.com"}}'
+
+# Slot rules per booking kind. Times are India local time (UTC+5:30).
+# weekdays: 0=Sunday .. 6=Saturday. Matches the site's posted hours
+# (Mon-Thu 9-6, Fri 9-3, closed Sat/Sun) — adjust as needed.
+SLOT_RULES = '{"appointment":{"windows":[{"weekdays":[1,2,3,4],"start":"09:00","end":"18:00"},{"weekdays":[5],"start":"09:00","end":"15:00"}],"step":30,"capacity":1},"lab":{"windows":[{"weekdays":[1,2,3,4],"start":"09:00","end":"17:30"},{"weekdays":[5],"start":"09:00","end":"14:30"}],"step":45,"capacity":1}}'
+
+# Secret (do not put a value here — set with:
+#   npx wrangler secret put MAIL_RELAY_SECRET
+# It must match the SECRET script property in gmail-relay.gs.
