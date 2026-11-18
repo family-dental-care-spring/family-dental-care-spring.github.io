@@ -363,6 +363,31 @@ header.site .btn-ghost:hover { border-color: var(--green); color: var(--green); 
 .appt-form textarea { resize: vertical; min-height: 5.5rem; }
 .appt-form .hint { display: block; font-size: .76rem; color: rgba(255,255,255,.7); margin-top: .4rem; }
 .appt-form .appt-submit { margin-top: .5rem; }
+.appt-form .form-subnote { font-size: .8rem; color: rgba(255,255,255,.7); margin: -.5rem 0 1rem; }
+
+/* ---------- live booking widget ---------- */
+.booking-widget { max-width: 640px; margin: 0 auto; text-align: left; }
+.booking-widget h3 { color: #fff; font-size: 1.05rem; margin: 0 0 1rem; }
+.booking-widget .field-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+.booking-widget label { display: block; }
+.booking-widget label > span { display: block; font: 700 .78rem/1 "Montserrat", ui-sans-serif, system-ui, sans-serif; color: #fff; margin-bottom: .4rem; }
+.booking-widget select, .booking-widget input {
+  width: 100%; border: none; border-radius: 8px; padding: .8rem .9rem; font: 500 .88rem/1.3 inherit;
+  background: rgba(255,255,255,.94); color: var(--ink); box-shadow: inset 0 0 0 1px rgba(255,255,255,.3);
+}
+.booking-widget select:focus, .booking-widget input:focus { outline: none; box-shadow: inset 0 0 0 2px var(--green); }
+.slot-grid { display: flex; flex-wrap: wrap; gap: .6rem; margin: 1rem 0 1.5rem; }
+.slot-btn {
+  border: none; border-radius: 8px; padding: .6rem 1rem; font: 600 .82rem/1 "Montserrat", sans-serif;
+  background: rgba(255,255,255,.12); color: #fff; box-shadow: inset 0 0 0 1px rgba(255,255,255,.3);
+  cursor: pointer; transition: background .15s ease, color .15s ease;
+}
+.slot-btn:hover { background: rgba(255,255,255,.22); }
+.slot-btn.is-selected { background: var(--green); color: var(--green-dark); box-shadow: inset 0 0 0 1px var(--green); }
+.booking-patient-fields { display: grid; gap: 1rem; margin-top: .5rem; }
+.booking-patient-fields h3 { margin-top: 1.2rem; }
+.booking-success { text-align: center; color: #fff; padding: 2rem 0; }
+.booking-success h3 { color: var(--green); font-size: 1.3rem; margin-bottom: .6rem; }
 
 /* ---------- sections ---------- */
 section { padding: clamp(3.2rem, 7vw, 5.5rem) 0; }

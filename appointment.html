@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,500;1,600&family=Montserrat:wght@400;500;600;700;800&family=Alex+Brush&display=swap">
-<link rel="stylesheet" href="assets/css/style.css?v=1793345819">
+<link rel="stylesheet" href="assets/css/style.css?v=1794983731">
 </head>
 <body>
 <div class="site-atmosphere" aria-hidden="true">
@@ -185,7 +185,8 @@
 
   <section class="contact-bar" id="appointment">
     <div class="wrap">
-      <form class="appt-form" data-quick-form action="https://formspree.io/familydentalcare@mail.com" method="POST" novalidate>
+      <div id="booking-widget" hidden></div>
+      <form class="appt-form" data-quick-form action="https://formspree.io/familydentalcare2@mail.com" method="POST" novalidate>
         <input type="hidden" name="_subject" value="New Appointment Request - Family Dental Care of Spring">
         <h3>Contact Information</h3>
         <div class="field-row">
@@ -251,6 +252,44 @@
             <option>Other</option>
           </select>
         </label>
+        <h3>Insurance Information</h3>
+        <p class="form-subnote">If you have dental insurance, please provide the details below so we can verify your benefits before your visit. Leave blank if you are a self-pay patient.</p>
+        <div class="field-row">
+          <label>
+            <span>Name of Insurance<span class="req">*</span></span>
+            <input type="text" name="insuranceName" placeholder="e.g. Delta Dental, Cigna, MetLife" autocomplete="off">
+          </label>
+          <label>
+            <span>Member ID<span class="req">*</span></span>
+            <input type="text" name="insuranceMemberId" placeholder="Member ID" autocomplete="off">
+          </label>
+        </div>
+        <div class="field-row">
+          <label>
+            <span>Group #<span class="req">*</span></span>
+            <input type="text" name="insuranceGroupNumber" placeholder="Group number" autocomplete="off">
+          </label>
+          <label>
+            <span>Phone Number for Insurance</span>
+            <input type="tel" name="insurancePhone" placeholder="(000) 000-0000" autocomplete="off">
+          </label>
+        </div>
+        <div class="field-row">
+          <label>
+            <span>Main Subscriber Name</span>
+            <input type="text" name="subscriberName" placeholder="Full name, if different from patient" autocomplete="off">
+          </label>
+          <label>
+            <span>Main Subscriber Date of Birth</span>
+            <input type="date" name="subscriberDob">
+          </label>
+        </div>
+        <label>
+          <span>Patient Date of Birth</span>
+          <input type="date" name="patientDob">
+        </label>
+
+        <h3>Comments and Questions</h3>
         <label>
           <span>Comments and Questions</span>
           <textarea name="notes" maxlength="250" placeholder="Please leave your comments and questions here. Do not enter any Protected Health Information (PHI)."></textarea>
@@ -353,6 +392,7 @@
   <svg viewBox="0 0 24 24"><use href="#ic-arrow-up"/></svg>
 </button>
 
-<script src="assets/js/main.js?v=1793345819" defer></script>
+<script src="assets/js/main.js?v=1794983731" defer></script>
+<script src="assets/js/booking.js?v=1794983731" defer></script>
 </body>
 </html>
